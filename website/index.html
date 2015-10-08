@@ -23,13 +23,115 @@
             margin:0;
             font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
             font-weight: 300;
+			text-align:center;
+        }
+		
+		header {
+			margin:20px 20px 40px 20px;
+		}
+		
+		h1 { 
+			display:none; 
+		}
+		
+		h1, h2 { 
+			font-weight:normal; 
+		}
+		
+		.dark { 
+			background:#757779; 
+			padding:40px;
+			color:white;
+		}
+		
+		.dark a {
+			color:white;
+		}
+		
+		.example { 
+			background:black; 
+			font-family:courier;
+			color:#21f838;
+			text-align:left;
+			padding:10px;
+			line-height:1.4em;
+		}
+		
+		#explanation { overflow:auto; }
+		
+		#explanation section, #explanation aside { 
+			float:left;
+			width:50%;
+		}
+		
+		#explanation section { 
+			text-align:left;
+			font-size:22px;
+			line-height:28px;
+			padding:0 5% 40px 0;
+			
+		}
+		
+		#beta { 
+			padding:80px 0;
+			font-size:28pt;
+		}
+
+        @media handheld, only screen and (max-width: 1000px) {
+			#explanation section, #explanation aside { 
+            	width:100%;
+			}
         }
 
-		</style>
-	</head>
-	<body>
-		<header>
-			<img src="img/logo.svg"/>
-		</header>
-	</body>
+        @media handheld, only screen and (max-width: 600px) {
+			.example { font-size:8pt; }
+        }
+		
+
+	</style>
+</head>
+<body>
+	<header>
+		<img src="img/logo.svg" width="190" height="190"/>
+		<h1>Sprint Zero<h1>
+		<h2>Opinionated scaffolding for software project toolsets.</h2>
+
+	</header>
+	<article class="dark" id="explanation">
+		<section>
+			<p>Every software projects starts with a sprint zero.</p>
+			<p>Sprint zero is when your development team spend a couple of weeks choosing, installing and configuring tools.  This upfront project "hit" will undoubtedly save time and money in the long term, but it doesn't need to be painful.</p>
+			<p>
+			Sprint Zero makes opinionated choices on the tools that you use allowing your team to get on with the important stuff, delivering business value.
+			</p>
+			<p>Let's <a href="#beta">get started</a>.</p>
+		</section>
+		
+		<aside class="example">
+			
+			~ $ sprint0
+			<br/>
+			Welcome to sprint0, how about calling: sprint0 scaffold
+			<br/><br/>~ $ sprint0 scaffold
+			
+			<br/>Scaffolding a software project...
+			<br/>GitLab..................................Installed
+			<br/>JenkinsCI...............................Installed
+			<br/>SonarQube...............................Installed
+			<br/>Artifactory.............................Installed
+			<br/>OpenLDAP................................Installed
+			<br/>Wiring Services.........................Complete
+			<br/>Super User Creation.....................Complete
+			<br/>Example Project Creation................Complete
+			
+			<br/><br/>~ $ 
+			
+		</aside>
+	</article>
+	<article id="beta">
+		We're currently ironing out the creases in beta.  
+		<br/>
+		Come back soon to start using sprint zero.
+	</article>
+</body>
 </html>
