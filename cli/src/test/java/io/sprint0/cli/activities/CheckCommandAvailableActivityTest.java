@@ -1,7 +1,9 @@
 package io.sprint0.cli.activities;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
 import org.junit.Test;
 
 /**
@@ -11,26 +13,31 @@ public class CheckCommandAvailableActivityTest {
 
     @Test
     public void testAvailableCommand() {
-        checkCommand("ls", ActivityResult.Status.SUCCESS);
+        ActivityResult result = checkCommand("ls", ActivityResult.Status.SUCCESS);
+        assertThat(result.getStatus(), is(ActivityResult.Status.SUCCESS));
+        assertThat(result.getCause(), is(nullValue()));
+
     }
 
     @Test
     public void testNotAvailableCommand() {
-        checkCommand("missingthing", ActivityResult.Status.FAILURE);
+        ActivityResult result = checkCommand("missingthing", ActivityResult.Status.FAILURE);
+        assertThat(result.getStatus(), is(ActivityResult.Status.FAILURE));
+        assertThat(result.getCause(), is(notNullValue()));
+
     }
 
 
-    public void checkCommand(String commandName, ActivityResult.Status status) {
+    public ActivityResult checkCommand(String commandName, ActivityResult.Status status) {
 
-        CheckCommmandAvailableActivity activity = new CheckCommmandAvailableActivity() {
+        CheckCommandAvailableActivity activity = new CheckCommandAvailableActivity() {
             @Override
             public String getCommand() {
                 return commandName;
             }
         };
 
-        ActivityResult activityResult = activity.go(null);
-        assertThat(activityResult.getStatus(), is(status));
+        return activity.go(null);
     }
 
 

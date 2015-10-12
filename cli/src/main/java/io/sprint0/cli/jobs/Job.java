@@ -5,7 +5,6 @@ import io.sprint0.cli.activities.ActivityResult;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.commons.cli.CommandLine;
 
 /**

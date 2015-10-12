@@ -1,12 +1,9 @@
 package io.sprint0.cli.activities;
 
-import java.io.IOException;
-import org.apache.commons.cli.CommandLine;
-
 /**
  *
  */
-public class CheckDockerInstalled extends CheckCommmandAvailableActivity {
+public class CheckDockerInstalled extends CheckCommandAvailableActivity {
 
     @Override
     public String getCommand() {

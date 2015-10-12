@@ -6,7 +6,7 @@ import org.apache.commons.cli.CommandLine;
 /**
  *
  */
-public abstract class CheckCommmandAvailableActivity implements Activity {
+public abstract class CheckCommandAvailableActivity implements Activity {
 
 
     @Override
@@ -14,7 +14,7 @@ public abstract class CheckCommmandAvailableActivity implements Activity {
         try {
             Runtime.getRuntime().exec(getCommand());
         } catch (IOException e) {
-            return new ActivityResult(ActivityResult.Status.FAILURE);
+            return new ActivityResult(ActivityResult.Status.FAILURE, e);
         }
 
         return new ActivityResult(ActivityResult.Status.SUCCESS);
