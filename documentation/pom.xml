@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.sprint0</groupId>
+    <artifactId>documentation</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.kohsuke</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>1.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+			
+		    <plugin>
+		      <groupId>com.github.jeluard</groupId>
+		      <artifactId>plantuml-maven-plugin</artifactId>
+		      <version>1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<phase>site</phase>
+					</execution>
+				</executions>
+			  
+		      <configuration>
+		        <sourceFiles>
+		          <directory>${basedir}/src/site/plantuml</directory>
+		          <includes>
+		            <include>**/*.txt</include>
+		          </includes>
+		        </sourceFiles>
+				<outputDirectory>${basedir}/target/site/images/plantuml</outputDirectory>
+		      </configuration>
+		      <dependencies>
+		        <dependency>
+		          <groupId>net.sourceforge.plantuml</groupId>
+		          <artifactId>plantuml</artifactId>
+		          <version>8030</version>
+		        </dependency>
+		      </dependencies>
+		    </plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pdf-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>pdf</id>
+						<phase>site</phase>
+						<goals>
+							<goal>pdf</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+							<includeReports>false</includeReports>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
+	
+</project>
