@@ -6,16 +6,10 @@ import org.apache.commons.cli.CommandLine;
 /**
  *
  */
-public class CheckDockerInstalled implements Activity {
+public class CheckDockerInstalled extends CheckCommmandAvailableActivity {
 
     @Override
-    public ActivityResult go(CommandLine commandLine) {
-        try {
-            Runtime.getRuntime().exec("docker");
-        } catch (IOException e) {
-            return new ActivityResult(ActivityResult.Status.FAILURE);
-        }
-
-        return new ActivityResult(ActivityResult.Status.SUCCESS);
+    public String getCommand() {
+        return "docker";
     }
 }

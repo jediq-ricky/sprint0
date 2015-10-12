@@ -3,20 +3,19 @@ package io.sprint0.cli;
 import io.sprint0.cli.jobs.FullScaffoldJob;
 import io.sprint0.cli.jobs.Job;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  */
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        new Main(args);
-    }
+    private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Main(String[] args) throws ParseException {
         Options options = setupOptions();
         CommandLineParser parser = new DefaultParser();
-
         CommandLine commandLine = parser.parse(options, args);
 
         if (commandLine.hasOption("h")) {
@@ -26,12 +25,13 @@ public class Main {
         }
 
         if (commandLine.getArgList().contains("scaffold")) {
-            Job job = new FullScaffoldJob();
-            Job.Status status = job.execute(commandLine);
-
-            System.out.println("status = " + status);
+            scaffold(commandLine);
         }
 
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main(args);
     }
 
     private Options setupOptions() {
@@ -41,7 +41,10 @@ public class Main {
         return options;
     }
 
-    private void scaffold() {
-        System.out.println("Welcome to sprint0, thanks for calling: sprint0 -scaffold");
+    private void scaffold(CommandLine commandLine) {
+        Job job = new FullScaffoldJob();
+        Job.Status status = job.execute(commandLine);
+
+        logger.info("status = " + status);
     }
 }
