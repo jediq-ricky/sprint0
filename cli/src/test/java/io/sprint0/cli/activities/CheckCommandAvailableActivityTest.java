@@ -13,31 +13,27 @@ public class CheckCommandAvailableActivityTest {
 
     @Test
     public void testAvailableCommand() {
-        ActivityResult result = checkCommand("ls", ActivityResult.Status.SUCCESS);
+        ActivityResult result = checkCommand("ls");
         assertThat(result.getStatus(), is(ActivityResult.Status.SUCCESS));
         assertThat(result.getCause(), is(nullValue()));
-
     }
 
     @Test
     public void testNotAvailableCommand() {
-        ActivityResult result = checkCommand("missingthing", ActivityResult.Status.FAILURE);
+        ActivityResult result = checkCommand("missingthing");
         assertThat(result.getStatus(), is(ActivityResult.Status.FAILURE));
         assertThat(result.getCause(), is(notNullValue()));
+    }
+
+    @Test
+    public void testToString() {
+        Activity activity = new CheckCommandAvailableActivity("mine");
+        assertThat(activity.toString(), is("Check command available activity : mine"));
 
     }
 
-
-    public ActivityResult checkCommand(String commandName, ActivityResult.Status status) {
-
-        CheckCommandAvailableActivity activity = new CheckCommandAvailableActivity() {
-            @Override
-            public String getCommand() {
-                return commandName;
-            }
-        };
-
-        return activity.go(null);
+    public ActivityResult checkCommand(String commandName) {
+        return new CheckCommandAvailableActivity(commandName).go(null);
     }
 
 

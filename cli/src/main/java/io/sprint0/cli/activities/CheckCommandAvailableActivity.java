@@ -6,13 +6,19 @@ import org.apache.commons.cli.CommandLine;
 /**
  *
  */
-public abstract class CheckCommandAvailableActivity implements Activity {
+public class CheckCommandAvailableActivity implements Activity {
 
+
+    private final String commandName;
+
+    public CheckCommandAvailableActivity(String commandName) {
+        this.commandName = commandName;
+    }
 
     @Override
     public ActivityResult go(CommandLine commandLine) {
         try {
-            Runtime.getRuntime().exec(getCommand());
+            Runtime.getRuntime().exec(commandName);
         } catch (IOException e) {
             return new ActivityResult(ActivityResult.Status.FAILURE, e);
         }
@@ -20,5 +26,8 @@ public abstract class CheckCommandAvailableActivity implements Activity {
         return new ActivityResult(ActivityResult.Status.SUCCESS);
     }
 
-    public abstract String getCommand();
+    @Override
+    public String toString() {
+        return "Check command available activity : " + commandName;
+    }
 }

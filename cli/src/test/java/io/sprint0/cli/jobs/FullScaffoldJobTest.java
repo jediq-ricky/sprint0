@@ -1,7 +1,7 @@
 package io.sprint0.cli.jobs;
 
 import io.sprint0.cli.activities.Activity;
-import io.sprint0.cli.activities.CheckDockerInstalled;
+import io.sprint0.cli.activities.CheckCommandAvailableActivity;
 import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
@@ -18,6 +18,6 @@ public class FullScaffoldJobTest {
         FullScaffoldJob fullScaffoldJob = new FullScaffoldJob();
         List<Activity> activities = fullScaffoldJob.getActivities();
         assertThat(activities.size(), is(1));
-        assertThat(activities.get(0), instanceOf(CheckDockerInstalled.class));
+        assertThat(activities.get(0), instanceOf(CheckCommandAvailableActivity.class));
     }
 }

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -15,6 +17,8 @@ public class Job {
     public enum Status {
         SUCCESS, FAILURE
     }
+
+    private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private List<Activity> activities = new ArrayList <> ();
 
@@ -26,12 +30,19 @@ public class Job {
 
         List<ActivityResult> results = new ArrayList <>();
         for (Activity activity : activities) {
+            String activityName = activity.toString();
+            logger.info("Activity : {} .....started.", activityName);
             ActivityResult result = activity.go(commandLine);
             results.add(result);
             if (ActivityResult.Status.FAILURE.equals(result.getStatus())) {
+                logger.info("Activity : {} .....failed.", activityName);
                 return Status.FAILURE;
             }
+            logger.info("Activity : {} .....succeeded.", activityName);
+
         }
+        logger.info("All activities succeeded.");
+
         return Status.SUCCESS;
     }
 
