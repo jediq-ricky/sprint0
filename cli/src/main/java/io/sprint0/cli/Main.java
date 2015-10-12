@@ -1,5 +1,7 @@
-package io.sprint0.command;
+package io.sprint0.cli;
 
+import io.sprint0.cli.jobs.FullScaffoldJob;
+import io.sprint0.cli.jobs.Job;
 import org.apache.commons.cli.*;
 
 /**
@@ -20,13 +22,15 @@ public class Main {
         if (commandLine.hasOption("h")) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("sprint0", options);
+            return;
         }
 
-        if (commandLine.hasOption("scaffold")) {
-            scaffold();
-        }
+        if (commandLine.getArgList().contains("scaffold")) {
+            Job job = new FullScaffoldJob();
+            Job.Status status = job.execute(commandLine);
 
-        System.out.println("commandLine = " + commandLine.getArgList());
+            System.out.println("status = " + status);
+        }
 
     }
 
