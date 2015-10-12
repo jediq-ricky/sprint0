@@ -21,11 +21,15 @@ public class Job {
     }
 
     public Status execute(CommandLine commandLine) {
-        List<ActivityResult> results = activities.stream()
-                .map(a -> a.go(commandLine))
-                .collect(Collectors.toList());
 
-        return results.stream().allMatch(ar -> ActivityResult.Status.SUCCESS.equals(ar.getStatus()))
-                ? Status.SUCCESS : Status.FAILURE;
+        List<ActivityResult> results = new ArrayList <>();
+        for (Activity activity : activities) {
+            ActivityResult result = activity.go(commandLine);
+            results.add(result);
+            if (ActivityResult.Status.FAILURE.equals(result.getStatus())) {
+                return Status.FAILURE;
+            }
+        }
+        return Status.SUCCESS;
     }
 }
