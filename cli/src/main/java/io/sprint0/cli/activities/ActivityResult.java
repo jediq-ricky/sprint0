@@ -10,15 +10,24 @@ public class ActivityResult {
     }
 
     private final Status status;
-
-    private Throwable cause;
+    private final String message;
+    private final Throwable cause;
 
     public ActivityResult(Status status) {
         this.status = status;
+        this.message = null;
+        this.cause = null;
+    }
+
+    public ActivityResult(Status status, String message) {
+        this.status = status;
+        this.message = message;
+        this.cause = null;
     }
 
     public ActivityResult(Status status, Throwable cause) {
         this.status = status;
+        this.message = cause.getMessage();
         this.cause = cause;
     }
 
@@ -28,5 +37,9 @@ public class ActivityResult {
 
     public Throwable getCause() {
         return cause;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

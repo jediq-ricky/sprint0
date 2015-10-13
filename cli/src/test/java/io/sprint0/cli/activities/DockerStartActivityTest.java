@@ -13,14 +13,12 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import java.util.Collections;
-
 import static org.mockito.Mockito.*;
 
 /**
  *
  */
-public class DockerPullActivityTest {
+public class DockerStartActivityTest {
 
     @Test
     public void testGoodResult() throws Exception {

@@ -1,29 +1,21 @@
 package io.sprint0.cli.activities;
 
 import com.spotify.docker.client.DockerCertificateException;
-import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerException;
-import com.spotify.docker.client.ProgressHandler;
-import com.spotify.docker.client.messages.Container;
-import com.spotify.docker.client.messages.Image;
-import com.spotify.docker.client.messages.ImageInfo;
-import com.spotify.docker.client.messages.ProgressMessage;
 import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
 /**
  *
  */
-public class DockerPullActivity extends DockerActivity {
+public class DockerStartActivity extends DockerActivity {
 
     private final String imageName;
 
     private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public DockerPullActivity(String imageName) {
+    public DockerStartActivity(String imageName) {
         this.imageName = imageName;
     }
 
