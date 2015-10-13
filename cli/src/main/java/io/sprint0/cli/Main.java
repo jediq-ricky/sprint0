@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Main {
 
-    private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     private Job.Status jobStatus;
     private boolean displayedHelp = false;
@@ -27,7 +27,7 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine = parser.parse(options, args);
 
-        if (commandLine.hasOption("h")) {
+        if (commandLine.hasOption("h") || commandLine.getArgList().isEmpty()) {
             showHelp(options);
             return;
         }
@@ -36,20 +36,22 @@ public class Main {
         if (jobLookup.containsKey(command)) {
             Job job = jobLookup.get(command).get();
             jobStatus = job.execute(commandLine);
-            logger.info("Job status : " + jobStatus);
+            LOGGER.info("Job status : " + jobStatus);
         } else {
             showHelp(options);
         }
     }
 
     public static void main(String[] args) throws Exception {
-        new Main(args);
+        Main main = new Main(args);
+        LOGGER.info("Completing sprint0 : " + main.getJobStatus());
     }
 
 
 
     private void showHelp(Options options) {
         HelpFormatter formatter = new HelpFormatter();
+
         formatter.printHelp("sprint0", options);
         displayedHelp = true;
     }

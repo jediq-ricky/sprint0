@@ -2,12 +2,15 @@ package io.sprint0.cli.activities;
 
 import com.spotify.docker.client.*;
 import com.spotify.docker.client.messages.Image;
+import io.sprint0.cli.SemVer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -17,7 +20,7 @@ public abstract class DockerActivity implements Activity {
     private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected String dockerMachineProtocol = "https";
-    protected String dockerMachineHost = "192.168.99.100";
+    private String dockerMachineHost = "192.168.99.100";
     protected String dockerMachinePort = "2376";
     protected String dockerCertPath = "/Users/rickyw/.docker/machine/machines/default";
 
@@ -26,7 +29,7 @@ public abstract class DockerActivity implements Activity {
     public DockerClient getDocker() throws DockerCertificateException {
 
         if (dockerClient == null) {
-            String uri = dockerMachineProtocol + "://" + dockerMachineHost + ":" + dockerMachinePort;
+            String uri = dockerMachineProtocol + "://" + getDockerMachineHost() + ":" + dockerMachinePort;
             Path certPath = Paths.get(dockerCertPath);
             DockerCertificates certificates = new DockerCertificates(certPath);
             dockerClient = DefaultDockerClient
@@ -39,19 +42,41 @@ public abstract class DockerActivity implements Activity {
     }
 
 
-    protected boolean checkForExistingImage(String imageName)
+    protected String findExistingImageId(String imageName)
             throws DockerException, InterruptedException, DockerCertificateException {
 
         List<Image> images = getDocker().listImages();
-        for (Image image : images) {
-            for (String repoTag : image.repoTags()) {
-                if (repoTag.startsWith(imageName + ":")) {
-                    logger.info("Already pulled image '{}' version number '{}'",
-                            imageName, repoTag.substring(repoTag.indexOf(":")+1));
-                    return true;
-                }
-            }
+
+        List<Image> matchingImages = images.stream()
+                .filter(i -> i.repoTags().stream()
+                        .anyMatch(t -> t.startsWith(imageName + ":")))
+                .collect(Collectors.toList());
+
+        logger.debug("matchingImages = ", matchingImages);
+
+        if (matchingImages.isEmpty()) {
+            return null;
         }
-        return false;
+
+        List<SemVer> semVers = matchingImages.stream()
+                .map(i -> i.repoTags().get(0))
+                .map(t -> t.split(":")[1])
+                .map(v -> new SemVer(v))
+                .collect(Collectors.toList());
+
+        semVers.sort(new SemVer.SVComparator());
+        SemVer newestVersion = semVers.get(semVers.size()-1);
+
+        String imagePlusVersion = imageName + ":" + newestVersion.getValue();
+        logger.debug("newestVersion = {}", imagePlusVersion);
+
+        Optional<Image> first = matchingImages.stream().filter(i -> i.repoTags().stream()
+                .anyMatch(t -> t.startsWith(imageName + ":"))).findFirst();
+
+        return first.get().id();
+    }
+
+    public String getDockerMachineHost() {
+        return dockerMachineHost;
     }
 }

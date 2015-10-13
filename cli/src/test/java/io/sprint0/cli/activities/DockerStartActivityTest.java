@@ -7,12 +7,13 @@ import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.ProgressHandler;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.mockito.Mockito.*;
 
 /**
@@ -21,67 +22,35 @@ import static org.mockito.Mockito.*;
 public class DockerStartActivityTest {
 
     @Test
-    public void testGoodResult() throws Exception {
+    public void testHaveNotPulled() throws Exception {
         final DockerClient docker = mock(DockerClient.class);
 
-        DockerActivity dockerActivity = new DockerPullActivity("test_jenkins") {
-            @Override
-            public DockerClient getDocker() throws DockerCertificateException {
-                return docker;
-            }
-        };
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
-
-        verify(docker).pull(eq("test_jenkins"), any(ProgressHandler.class));
-    }
-
-    @Test
-    public void testBadResult() throws Exception {
-        final DockerClient docker = mock(DockerClient.class);
-
-        DockerActivity dockerActivity = new DockerPullActivity("test_jenkins") {
-            @Override
-            public DockerClient getDocker() throws DockerCertificateException {
-                return docker;
-            }
-        };
-
-        doThrow(new DockerException("fake")).when(docker).pull(eq("test_jenkins"), any(ProgressHandler.class));
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.FAILURE));
-        assertThat(activityResult.getCause(), is(instanceOf(DockerException.class)));
-    }
-
-    @Test
-    public void testAlreadyPulled() throws Exception {
-        final DockerClient docker = mock(DockerClient.class);
-
-        DockerActivity dockerActivity = new DockerPullActivity("test_jenkins") {
+        DockerActivity dockerActivity = new DockerStartActivity("test_jenkins") {
             @Override
             public DockerClient getDocker() throws DockerCertificateException {
                 return docker;
             }
         };
         Image image = mock(Image.class);
-        when(image.repoTags()).thenReturn(ImmutableList.of("test_jenkins:123456"));
+        when(image.repoTags()).thenReturn(ImmutableList.of("test_jenkinsXXXX:123456"));
         when(docker.listImages()).thenReturn(ImmutableList.of(image));
 
-        dockerActivity.go(null);
+        ActivityResult activityResult = dockerActivity.go(null);
+        assertThat(activityResult.getStatus(), is(ActivityResult.Status.FAILURE));
+        assertThat(activityResult.getMessage(), is("We haven't pulled image : test_jenkins"));
 
-        verify(docker, never()).pull(eq("test_jenkins"), any(ProgressHandler.class));
+        verify(docker, never()).startContainer(eq("test_jenkins"));
 
     }
 
+
+    @Ignore
     @Test
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
-        DockerPullActivity dockerPullActivity = new DockerPullActivity("jenkins");
+        DockerActivity dockerActivity = new DockerStartActivity("jenkins");
 
-
-        ActivityResult activityResult = dockerPullActivity.go(null);
+        ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
     }
 }

@@ -1,18 +1,10 @@
 package io.sprint0.cli.activities;
 
 import com.spotify.docker.client.DockerCertificateException;
-import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerException;
-import com.spotify.docker.client.ProgressHandler;
-import com.spotify.docker.client.messages.Container;
-import com.spotify.docker.client.messages.Image;
-import com.spotify.docker.client.messages.ImageInfo;
-import com.spotify.docker.client.messages.ProgressMessage;
 import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 /**
  *
@@ -30,7 +22,7 @@ public class DockerPullActivity extends DockerActivity {
     @Override
     public ActivityResult go(CommandLine commandLine) {
         try {
-            if (checkForExistingImage(imageName)) {
+            if (findExistingImageId(imageName) != null) {
                 return new ActivityResult(ActivityResult.Status.SUCCESS);
             }
             getDocker().pull(imageName, new DockerProgressHandler(imageName));

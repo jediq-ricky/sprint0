@@ -68,7 +68,8 @@ public class DockerPullActivityTest {
             }
         };
         Image image = mock(Image.class);
-        when(image.repoTags()).thenReturn(ImmutableList.of("test_jenkins:123456"));
+        when(image.id()).thenReturn("123456");
+        when(image.repoTags()).thenReturn(ImmutableList.of("test_jenkins:12.34.56"));
         when(docker.listImages()).thenReturn(ImmutableList.of(image));
 
         dockerActivity.go(null);
@@ -81,7 +82,6 @@ public class DockerPullActivityTest {
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
         DockerPullActivity dockerPullActivity = new DockerPullActivity("jenkins");
-
 
         ActivityResult activityResult = dockerPullActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
