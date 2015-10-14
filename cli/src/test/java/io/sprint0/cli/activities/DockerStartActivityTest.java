@@ -44,7 +44,6 @@ public class DockerStartActivityTest {
     }
 
 
-    @Ignore
     @Test
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
