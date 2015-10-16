@@ -10,8 +10,8 @@
           <sideBarEnabled>false</sideBarEnabled>
           <topBarEnabled>true</topBarEnabled>
 		  <topBarIcon>
-		        <name>Maven Fluido Skin</name>
-		        <alt>Maven Fluido Skin</alt>
+		        <name>Sprint 0 Icon</name>
+		        <alt>Sprint 0 Icon</alt>
 		        <src>/img/logo.svg</src>
 		        <href>/index.html</href>
 		      </topBarIcon>
@@ -24,8 +24,8 @@
 
 
      <body>
-         <menu name="Architecture">
-             <item name="Overview" href="architecture/overview.html"/>
+         <menu name="CLI">
+             <item name="Overview" href="overview.html"/>
 		</menu>
 		 <footer>&copy; Copyright 2015</footer>
 

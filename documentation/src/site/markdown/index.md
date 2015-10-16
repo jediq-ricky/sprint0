@@ -11,4 +11,5 @@ Uses [Docker](http://docker.org) to host multiple tool containers:
 1. Artifactory Server
 1. Sonar Server
 1. GitLab Server
+1. Apache Bloodhound Server
 

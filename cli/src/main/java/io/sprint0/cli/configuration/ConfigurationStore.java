@@ -1,4 +1,4 @@
-package io.sprint0.cli.installation;
+package io.sprint0.cli.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ConfigurationManager {
+public class ConfigurationStore {
 
     private ObjectMapper mapper = new ObjectMapper();
 

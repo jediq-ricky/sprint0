@@ -10,4 +10,5 @@ Want to resolve the following :
 * **sca.sprint0** to Sonar instance
 * **git.sprint0** to GitLab instance
 * **ldap.sprint0** to FreeIPA instance
+* **track.sprint0** to Apache Bloodhound instance
 

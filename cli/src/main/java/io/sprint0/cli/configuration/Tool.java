@@ -1,4 +1,4 @@
-package io.sprint0.cli.installation;
+package io.sprint0.cli.configuration;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
