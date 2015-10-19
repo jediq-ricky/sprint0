@@ -3,6 +3,8 @@ package io.sprint0.cli.activities;
 import com.spotify.docker.client.*;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.SemVer;
+import io.sprint0.cli.configuration.Configuration;
+import io.sprint0.cli.jobs.Job;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,18 +21,19 @@ public abstract class DockerActivity implements Activity {
 
     private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    protected String dockerMachineProtocol = "https";
-    private String dockerMachineHost = "192.168.99.100";
-    protected String dockerMachinePort = "2376";
-    protected String dockerCertPath = "/Users/rickyw/.docker/machine/machines/default";
+    protected Job job;
+    protected Configuration config;
 
     private DockerClient dockerClient;
 
     public DockerClient getDocker() throws DockerCertificateException {
 
         if (dockerClient == null) {
-            String uri = dockerMachineProtocol + "://" + getDockerMachineHost() + ":" + dockerMachinePort;
-            Path certPath = Paths.get(dockerCertPath);
+
+            String uri = config.getCurrentDockerProtocol()
+                    + "://" + config.getCurrentDockerHost()
+                    + ":" + config.getCurrentDockerPort();
+            Path certPath = Paths.get(config.getCurrentDockerCertPath());
             DockerCertificates certificates = new DockerCertificates(certPath);
             dockerClient = DefaultDockerClient
                     .fromEnv()
@@ -41,6 +44,11 @@ public abstract class DockerActivity implements Activity {
         return dockerClient;
     }
 
+    @Override
+    public void setJob(Job job) {
+        this.job = job;
+        config = job.getConfigurationStore().loadConfiguration();
+    }
 
     protected String findExistingImageId(String imageName)
             throws DockerException, InterruptedException, DockerCertificateException {
@@ -74,9 +82,5 @@ public abstract class DockerActivity implements Activity {
                 .anyMatch(t -> t.startsWith(imageName + ":"))).findFirst();
 
         return first.get().id();
-    }
-
-    public String getDockerMachineHost() {
-        return dockerMachineHost;
     }
 }

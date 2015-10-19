@@ -15,18 +15,25 @@ public class SemVer {
     private int patch;
     private String classifier;
 
+    private boolean latest;
+
 
     public SemVer(String value) {
         this.value = value;
-        Matcher matcher = pattern.matcher(value);
-        boolean foundMatch = matcher.find();
-        if (!foundMatch) {
-            throw new IllegalArgumentException("Value " + value + " is not sem-ver compliant");
-        }
+        if (value.equalsIgnoreCase("latest")) {
+            latest = true;
+        } else {
 
-        major = Integer.parseInt(matcher.group(1));
-        minor = Integer.parseInt(matcher.group(2));
-        patch = Integer.parseInt(matcher.group(3));
+            Matcher matcher = pattern.matcher(value);
+            boolean foundMatch = matcher.find();
+            if (!foundMatch) {
+                throw new IllegalArgumentException("Value '" + value + "' is not sem-ver compliant");
+            }
+
+            major = Integer.parseInt(matcher.group(1));
+            minor = Integer.parseInt(matcher.group(2));
+            patch = Integer.parseInt(matcher.group(3));
+        }
     }
 
     public String getValue() {

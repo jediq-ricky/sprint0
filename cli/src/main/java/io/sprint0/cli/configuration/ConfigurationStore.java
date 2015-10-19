@@ -3,18 +3,32 @@ package io.sprint0.cli.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConfigurationStore {
+
+    public static final String DEFAULT_CONFIGURATION_JSON_FILENAME = "defaultConfiguration.json";
+    private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private ObjectMapper mapper = new ObjectMapper();
 
     public Configuration loadConfiguration() {
         Path filePath = findConfigPath();
         try {
-            return mapper.readValue(filePath.toFile(), Configuration.class);
+            if (filePath.toFile().exists()) {
+                return mapper.readValue(filePath.toFile(), Configuration.class);
+            } else {
+                logger.info("Could not load config file from : {}, using default values.", filePath);
+
+                try (InputStream stream = this.getClass().getResourceAsStream(DEFAULT_CONFIGURATION_JSON_FILENAME)) {
+                    return mapper.readValue(stream, Configuration.class);
+                }
+            }
         } catch (IOException e) {
             throw new IllegalStateException("Could not load config file from :" + filePath, e);
         }

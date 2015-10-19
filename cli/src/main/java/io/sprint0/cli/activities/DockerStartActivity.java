@@ -68,7 +68,7 @@ public class DockerStartActivity extends DockerActivity {
         final Map<String, List<PortBinding>> portBindings = new HashMap<>();
         for (String port : ports) {
             List<PortBinding> hostPorts = new ArrayList<>();
-            hostPorts.add(PortBinding.of(getDockerMachineHost(), port));
+            hostPorts.add(PortBinding.of(config.getCurrentDockerHost(), port));
             portBindings.put(port, hostPorts);
         }
         return portBindings;

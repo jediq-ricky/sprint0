@@ -7,6 +7,9 @@ import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.ProgressHandler;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
+import io.sprint0.cli.configuration.Configuration;
+import io.sprint0.cli.configuration.ConfigurationStore;
+import io.sprint0.cli.jobs.Job;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -48,8 +51,19 @@ public class DockerStartActivityTest {
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
         DockerActivity dockerActivity = new DockerStartActivity("jenkins");
+        Job job = new Job();
+        job.setConfigurationStore(new ConfigurationStore());
+        job.addActivity(dockerActivity);
+
 
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+    }
+
+    @Test
+    public void test() {
+        ConfigurationStore configurationStore = new ConfigurationStore();
+        Configuration configuration = new Configuration();
+        configurationStore.saveConfiguration(configuration);
     }
 }

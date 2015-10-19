@@ -33,11 +33,11 @@ public class ConfigurationStoreTest {
         ConfigurationStore manager = new ConfigurationStore();
 
         Configuration original = new Configuration();
-        original.setCurrentHost(host);
+        original.setCurrentDockerHost(host);
         manager.saveConfiguration(original);
 
         Configuration fromFile = manager.loadConfiguration();
-        assertThat(fromFile.getCurrentHost(), is(host));
+        assertThat(fromFile.getCurrentDockerHost(), is(host));
 
         manager.removeConfiguration();
     }

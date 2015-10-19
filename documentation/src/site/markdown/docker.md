@@ -1,5 +1,13 @@
 #Docker
 
+To start a local docker uber-container use : 
+
+    docker-machine start default
+
+then
+
+    eval "$(docker-machine env default)"
+    
 
 
 ##Issues

@@ -29,6 +29,7 @@ public class Job implements ConfigurationStoreHolder {
 
     public void addActivity(Activity activity) {
         this.activities.add(activity);
+        activity.setJob(this);
     }
 
     public Status execute(CommandLine commandLine) {
@@ -58,5 +59,9 @@ public class Job implements ConfigurationStoreHolder {
     @Override
     public void setConfigurationStore(ConfigurationStore configurationStore) {
         this.configurationStore = configurationStore;
+    }
+
+    public ConfigurationStore getConfigurationStore() {
+        return configurationStore;
     }
 }
