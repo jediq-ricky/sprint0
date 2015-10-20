@@ -12,3 +12,10 @@ Want to resolve the following :
 * **ldap.sprint0** to FreeIPA instance
 * **track.sprint0** to Apache Bloodhound instance
 
+
+
+
+
+
+http://www.freeipa.org/page/Docker
+https://hub.docker.com/r/adelton/freeipa-server/

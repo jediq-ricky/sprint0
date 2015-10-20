@@ -3,8 +3,7 @@ package io.sprint0.cli.jobs;
 import io.sprint0.cli.activities.CheckCommandAvailableActivity;
 import io.sprint0.cli.activities.DockerPullActivity;
 import io.sprint0.cli.activities.DockerStartActivity;
-import io.sprint0.cli.configuration.ConfigurationStore;
-import io.sprint0.cli.tools.Dns;
+import io.sprint0.cli.tools.Bind;
 import io.sprint0.cli.tools.Jenkins;
 
 /**
@@ -18,12 +17,12 @@ public class FullScaffoldJob extends Job {
         addActivity(new CheckCommandAvailableActivity("docker"));
 
         Jenkins jenkins = new Jenkins();
-        Dns dns = new Dns();
+        Bind bind = new Bind();
 
         addActivity(new DockerPullActivity(jenkins));
-        addActivity(new DockerPullActivity(dns));
+        addActivity(new DockerPullActivity(bind));
 
         addActivity(new DockerStartActivity(jenkins));
-        addActivity(new DockerStartActivity(dns));
+        addActivity(new DockerStartActivity(bind));
     }
 }

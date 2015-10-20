@@ -44,19 +44,19 @@ public class DockerStartActivity extends DockerActivity {
             HostConfig hostConfig = HostConfig.builder().portBindings(portBindings).build();
 
             ContainerConfig containerConfig = ContainerConfig.builder()
-                    .image(imageId).exposedPorts(ports)
-              .build();
+                    .image(imageId)
+                    .exposedPorts(ports)
+                    .build();
 
             ContainerCreation creation = docker.createContainer(containerConfig);
             String id = creation.id();
 
 
             ContainerInfo info = docker.inspectContainer(id);
-            System.out.println("info = " + info);
+            logger.info("Starting container = " + info);
 
             docker.startContainer(id, hostConfig);
 
-            ContainerInfo infoAfter = docker.inspectContainer(id);
 
         } catch (DockerException | DockerCertificateException | InterruptedException e) {
             logger.debug("Got exception from docker for : " + tool, e);

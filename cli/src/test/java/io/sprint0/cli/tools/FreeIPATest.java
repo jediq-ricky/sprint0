@@ -3,7 +3,7 @@ package io.sprint0.cli.tools;
 import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.activities.ActivityResult;
 import io.sprint0.cli.activities.DockerActivity;
-import io.sprint0.cli.activities.DockerStartActivity;
+import io.sprint0.cli.activities.DockerPullActivity;
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.jobs.Job;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,14 +14,14 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-public class DnsTest {
+public class FreeIPATest {
 
 
 
     @Test
     @Category(IntegrationTest.class)
     public void testPullConfigureAndRun() {
-        DockerActivity dockerActivity = new DockerStartActivity(new Dns());
+        DockerActivity dockerActivity = new DockerPullActivity(new FreeIPA());
         Job job = new Job();
         job.setConfigurationStore(new ConfigurationStore());
         job.addActivity(dockerActivity);

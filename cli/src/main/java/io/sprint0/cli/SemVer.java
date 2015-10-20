@@ -14,6 +14,7 @@ public class SemVer {
     private int minor;
     private int patch;
     private String classifier;
+    private boolean strict = false;
 
     private boolean latest;
 
@@ -26,13 +27,16 @@ public class SemVer {
 
             Matcher matcher = pattern.matcher(value);
             boolean foundMatch = matcher.find();
-            if (!foundMatch) {
-                throw new IllegalArgumentException("Value '" + value + "' is not sem-ver compliant");
+            if (foundMatch) {
+                major = Integer.parseInt(matcher.group(1));
+                minor = Integer.parseInt(matcher.group(2));
+                patch = Integer.parseInt(matcher.group(3));
+            } else {
+                if (strict) {
+                    throw new IllegalArgumentException("Value '" + value + "' is not sem-ver compliant");
+                }
             }
 
-            major = Integer.parseInt(matcher.group(1));
-            minor = Integer.parseInt(matcher.group(2));
-            patch = Integer.parseInt(matcher.group(3));
         }
     }
 

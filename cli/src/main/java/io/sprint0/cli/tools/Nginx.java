@@ -5,11 +5,11 @@ import io.sprint0.cli.configuration.Tool;
 /**
  *
  */
-public class Dns extends Tool {
+public class Nginx extends Tool {
 
-    public Dns() {
-        setName("Dns");
-        setImageRef("sameersbn/bind");
+    public Nginx() {
+        setName("Nginx");
+        setImageRef("nginx");
         setVersion("latest");
     }
 }
