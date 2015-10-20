@@ -32,7 +32,9 @@ public class ConfigurationStore {
                         filePath, this.getClass().getResource(DEFAULT_CONFIGURATION_JSON_FILENAME).toURI());
 
                 try (InputStream stream = this.getClass().getResourceAsStream(DEFAULT_CONFIGURATION_JSON_FILENAME)) {
-                    return mapper.readValue(stream, Configuration.class);
+                    Configuration configuration = mapper.readValue(stream, Configuration.class);
+                    saveConfiguration(configuration);
+                    return configuration;
                 }
             }
         } catch (IOException | URISyntaxException e) {
