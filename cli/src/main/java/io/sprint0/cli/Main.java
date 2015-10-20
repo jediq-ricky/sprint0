@@ -51,8 +51,6 @@ public class Main {
         LOGGER.info("Completing sprint0 : " + main.getJobStatus());
     }
 
-
-
     private void showHelp(Options options) {
         HelpFormatter formatter = new HelpFormatter();
 
