@@ -10,6 +10,7 @@ import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.configuration.Configuration;
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.jobs.Job;
+import io.sprint0.cli.tools.Jenkins;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -28,7 +29,7 @@ public class DockerStartActivityTest {
     public void testHaveNotPulled() throws Exception {
         final DockerClient docker = mock(DockerClient.class);
 
-        DockerActivity dockerActivity = new DockerStartActivity("test_jenkins") {
+        DockerActivity dockerActivity = new DockerStartActivity(new Jenkins()) {
             @Override
             public DockerClient getDocker() throws DockerCertificateException {
                 return docker;
@@ -40,7 +41,7 @@ public class DockerStartActivityTest {
 
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.FAILURE));
-        assertThat(activityResult.getMessage(), is("We haven't pulled image : test_jenkins"));
+        assertThat(activityResult.getMessage(), is("We haven't pulled image : jenkins"));
 
         verify(docker, never()).startContainer(eq("test_jenkins"));
 
@@ -50,7 +51,7 @@ public class DockerStartActivityTest {
     @Test
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
-        DockerActivity dockerActivity = new DockerStartActivity("jenkins");
+        DockerActivity dockerActivity = new DockerStartActivity(new Jenkins());
         Job job = new Job();
         job.setConfigurationStore(new ConfigurationStore());
         job.addActivity(dockerActivity);

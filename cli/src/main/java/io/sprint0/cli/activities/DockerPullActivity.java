@@ -2,6 +2,7 @@ package io.sprint0.cli.activities;
 
 import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerException;
+import io.sprint0.cli.configuration.Tool;
 import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,24 +12,24 @@ import org.slf4j.LoggerFactory;
  */
 public class DockerPullActivity extends DockerActivity {
 
-    private final String imageName;
+    private final Tool tool;
 
     private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public DockerPullActivity(String imageName) {
-        this.imageName = imageName;
+    public DockerPullActivity(Tool tool) {
+        this.tool = tool;
     }
 
     @Override
     public ActivityResult go(CommandLine commandLine) {
         try {
-            if (findExistingImageId(imageName) != null) {
+            if (findExistingImageId(tool.getImageRef()) != null) {
                 return new ActivityResult(ActivityResult.Status.SUCCESS);
             }
-            getDocker().pull(imageName, new DockerProgressHandler(imageName));
+            getDocker().pull(tool.getImageRef(), new DockerProgressHandler(tool.getImageRef()));
 
         } catch (DockerException | DockerCertificateException | InterruptedException e) {
-            logger.debug("Got exception from docker for imageName : " + imageName, e);
+            logger.debug("Got exception from docker for imageName : " + tool, e);
             return new ActivityResult(ActivityResult.Status.FAILURE, e);
         }
 

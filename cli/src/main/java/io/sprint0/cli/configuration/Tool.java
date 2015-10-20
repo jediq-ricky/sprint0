@@ -8,11 +8,18 @@ public class Tool {
 
     private String name;
     private String imageId;
+    private String imageRef;
     private String version;
+    private String [] ports;
     private LocalDateTime installDateTime;
 
-    private Map<Integer, Integer> portMappings = new HashMap<>();
+    public String getImageRef() {
+        return imageRef;
+    }
 
+    public void setImageRef(String imageRef) {
+        this.imageRef = imageRef;
+    }
 
     public String getName() {
         return name;
@@ -46,11 +53,16 @@ public class Tool {
         this.installDateTime = installDateTime;
     }
 
-    public Map<Integer, Integer> getPortMappings() {
-        return portMappings;
+    public String[] getPorts() {
+        return ports;
     }
 
-    public void setPortMappings(Map<Integer, Integer> portMappings) {
-        this.portMappings = portMappings;
+    public void setPorts(String ... ports) {
+        this.ports = ports;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

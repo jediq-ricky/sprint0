@@ -38,7 +38,7 @@ public class Main {
         String command = commandLine.getArgList().get(0);
         if (jobLookup.containsKey(command)) {
             Job job = jobLookup.get(command).get();
-            job.setConfigurationStore(configurationStore    );
+            job.setConfigurationStore(configurationStore);
             jobStatus = job.execute(commandLine);
             LOGGER.info("Job status : " + jobStatus);
         } else {

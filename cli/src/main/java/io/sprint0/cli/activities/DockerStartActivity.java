@@ -5,6 +5,7 @@ import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.messages.*;
 import io.sprint0.cli.configuration.Configuration;
+import io.sprint0.cli.configuration.Tool;
 import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,25 +20,26 @@ import java.util.Map;
  */
 public class DockerStartActivity extends DockerActivity {
 
-    private final String imageName;
+    private final Tool tool;
 
     private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public DockerStartActivity(String imageName) {
-        this.imageName = imageName;
+    public DockerStartActivity(Tool tool) {
+        this.tool = tool;
     }
+
 
     @Override
     public ActivityResult go(CommandLine commandLine) {
         try {
-            String imageId = findExistingImageId(imageName);
+            String imageId = findExistingImageId(tool.getImageRef());
             if (imageId == null) {
-                return new ActivityResult(ActivityResult.Status.FAILURE, "We haven't pulled image : " + imageName);
+                return new ActivityResult(ActivityResult.Status.FAILURE, "We haven't pulled image : " + tool.getImageRef());
             }
 
             DockerClient docker = getDocker();
 
-            String[] ports = {"80", "22"};
+            String[] ports = tool.getPorts();
             final Map<String, List<PortBinding>> portBindings = getPortBindings(ports);
             HostConfig hostConfig = HostConfig.builder().portBindings(portBindings).build();
 
@@ -55,10 +57,9 @@ public class DockerStartActivity extends DockerActivity {
             docker.startContainer(id, hostConfig);
 
             ContainerInfo infoAfter = docker.inspectContainer(id);
-            System.out.println("infoAfter = " + infoAfter);
 
         } catch (DockerException | DockerCertificateException | InterruptedException e) {
-            logger.debug("Got exception from docker for imageName : " + imageName, e);
+            logger.debug("Got exception from docker for : " + tool, e);
             return new ActivityResult(ActivityResult.Status.FAILURE, e);
         }
 
@@ -71,6 +72,7 @@ public class DockerStartActivity extends DockerActivity {
 
         for (String port : ports) {
             List<PortBinding> hostPorts = new ArrayList<>();
+            new PortBinding();
             hostPorts.add(PortBinding.of(config.getCurrentDockerHost(), port));
             portBindings.put(port, hostPorts);
         }
