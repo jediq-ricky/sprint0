@@ -1,0 +1,6 @@
+{
+  "currentDockerHost": "https",
+  "currentDockerProtocol": "192.168.99.100",
+  "currentDockerPort": "2376",
+  "currentDockerCertPath": "/Users/rickywalker/.docker/machine/machines/default"
+}

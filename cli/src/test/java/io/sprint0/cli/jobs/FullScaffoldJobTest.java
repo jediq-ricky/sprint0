@@ -9,6 +9,7 @@ import static org.hamcrest.core.Is.is;
 
 import io.sprint0.cli.activities.DockerPullActivity;
 import io.sprint0.cli.activities.DockerStartActivity;
+import io.sprint0.cli.configuration.ConfigurationStore;
 import org.junit.Test;
 
 /**
@@ -19,6 +20,7 @@ public class FullScaffoldJobTest {
     @Test
     public void test() {
         FullScaffoldJob fullScaffoldJob = new FullScaffoldJob();
+
         List<Activity> activities = fullScaffoldJob.getActivities();
         assertThat(activities.size(), is(3));
         assertThat(activities.get(0), instanceOf(CheckCommandAvailableActivity.class));

@@ -4,6 +4,7 @@ import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.messages.*;
+import io.sprint0.cli.configuration.Configuration;
 import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +67,8 @@ public class DockerStartActivity extends DockerActivity {
 
     private Map<String, List<PortBinding>> getPortBindings(String[] ports) {
         final Map<String, List<PortBinding>> portBindings = new HashMap<>();
+        Configuration config = job.getConfigurationStore().loadConfiguration();
+
         for (String port : ports) {
             List<PortBinding> hostPorts = new ArrayList<>();
             hostPorts.add(PortBinding.of(config.getCurrentDockerHost(), port));

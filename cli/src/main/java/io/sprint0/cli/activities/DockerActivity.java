@@ -22,13 +22,14 @@ public abstract class DockerActivity implements Activity {
     private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected Job job;
-    protected Configuration config;
 
     private DockerClient dockerClient;
 
     public DockerClient getDocker() throws DockerCertificateException {
 
         if (dockerClient == null) {
+
+            Configuration config = job.getConfigurationStore().loadConfiguration();
 
             String uri = config.getCurrentDockerProtocol()
                     + "://" + config.getCurrentDockerHost()
@@ -47,7 +48,6 @@ public abstract class DockerActivity implements Activity {
     @Override
     public void setJob(Job job) {
         this.job = job;
-        config = job.getConfigurationStore().loadConfiguration();
     }
 
     protected String findExistingImageId(String imageName)
