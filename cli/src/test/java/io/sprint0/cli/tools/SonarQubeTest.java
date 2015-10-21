@@ -14,20 +14,10 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-public class SonarQubeTest {
+public class SonarQubeTest extends ToolTest <SonarQube> {
 
-
-
-    @Test
-    @Category(IntegrationTest.class)
-    public void testPullConfigureAndRun() {
-        DockerActivity dockerActivity = new DockerPullActivity(new SonarQube());
-        Job job = new Job();
-        job.setConfigurationStore(new ConfigurationStore());
-        job.addActivity(dockerActivity);
-
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+    @Override
+    public SonarQube createTool() {
+        return new SonarQube();
     }
 }

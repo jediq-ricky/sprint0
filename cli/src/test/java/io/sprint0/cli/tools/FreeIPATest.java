@@ -14,20 +14,10 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-public class FreeIPATest {
+public class FreeIPATest extends ToolTest <FreeIPA> {
 
-
-
-    @Test
-    @Category(IntegrationTest.class)
-    public void testPullConfigureAndRun() {
-        DockerActivity dockerActivity = new DockerPullActivity(new FreeIPA());
-        Job job = new Job();
-        job.setConfigurationStore(new ConfigurationStore());
-        job.addActivity(dockerActivity);
-
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+    @Override
+    public FreeIPA createTool() {
+        return new FreeIPA();
     }
 }

@@ -14,20 +14,10 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-public class ArtifactoryTest {
+public class ArtifactoryTest extends ToolTest <Artifactory> {
 
-
-
-    @Test
-    @Category(IntegrationTest.class)
-    public void testPullConfigureAndRun() {
-        DockerActivity dockerActivity = new DockerPullActivity(new Artifactory());
-        Job job = new Job();
-        job.setConfigurationStore(new ConfigurationStore());
-        job.addActivity(dockerActivity);
-
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+    @Override
+    public Artifactory createTool() {
+        return new Artifactory();
     }
 }

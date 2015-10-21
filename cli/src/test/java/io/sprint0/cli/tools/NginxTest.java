@@ -14,20 +14,10 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-public class NginxTest {
+public class NginxTest extends ToolTest <Nginx> {
 
-
-
-    @Test
-    @Category(IntegrationTest.class)
-    public void testPullConfigureAndRun() {
-        DockerActivity dockerActivity = new DockerPullActivity(new Nginx());
-        Job job = new Job();
-        job.setConfigurationStore(new ConfigurationStore());
-        job.addActivity(dockerActivity);
-
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+    @Override
+    public Nginx createTool() {
+        return new Nginx();
     }
 }

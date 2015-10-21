@@ -8,26 +8,18 @@ import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.jobs.Job;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 /**
  *
  */
-public class BloodhoundTest {
+@Ignore
+public class BloodhoundTest extends ToolTest <Bloodhound> {
 
-
-
-    @Test
-    @Category(IntegrationTest.class)
-    public void testPullConfigureAndRun() {
-        DockerActivity dockerActivity = new DockerPullActivity(new Bloodhound());
-        Job job = new Job();
-        job.setConfigurationStore(new ConfigurationStore());
-        job.addActivity(dockerActivity);
-
-
-        ActivityResult activityResult = dockerActivity.go(null);
-        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+    @Override
+    public Bloodhound createTool() {
+        return new Bloodhound();
     }
 }

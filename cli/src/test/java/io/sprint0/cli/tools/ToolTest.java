@@ -15,10 +15,22 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-public class JenkinsTest extends ToolTest <Jenkins> {
+public abstract class ToolTest <T extends Tool> {
 
-    @Override
-    public Jenkins createTool() {
-        return new Jenkins();
+
+    @Test
+    @Category(IntegrationTest.class)
+    public void testPull() {
+        DockerActivity dockerActivity = new DockerPullActivity(createTool());
+        Job job = new Job();
+        job.setConfigurationStore(new ConfigurationStore());
+        job.addActivity(dockerActivity);
+
+        ActivityResult activityResult = dockerActivity.go(null);
+        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
     }
+
+    protected abstract T createTool();
+
+
 }
