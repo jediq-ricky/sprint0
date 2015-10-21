@@ -8,7 +8,7 @@ public class Tool {
     private String imageId;
     private String imageRef;
     private String version;
-    private String [] ports;
+    private String [] ports = new String [0];
     private LocalDateTime installDateTime;
 
     public String getImageRef() {

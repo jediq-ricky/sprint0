@@ -22,11 +22,7 @@ public class FullScaffoldJobTest {
         FullScaffoldJob fullScaffoldJob = new FullScaffoldJob();
 
         List<Activity> activities = fullScaffoldJob.getActivities();
-        assertThat(activities.size(), is(5));
+        assertThat(activities.size(), is(11));
         assertThat(activities.get(0), instanceOf(CheckCommandAvailableActivity.class));
-        assertThat(activities.get(1), instanceOf(DockerPullActivity.class));
-        assertThat(activities.get(2), instanceOf(DockerPullActivity.class));
-        assertThat(activities.get(3), instanceOf(DockerStartActivity.class));
-        assertThat(activities.get(4), instanceOf(DockerStartActivity.class));
     }
 }

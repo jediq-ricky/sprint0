@@ -60,8 +60,6 @@ public abstract class DockerActivity implements Activity {
                         .anyMatch(t -> t.startsWith(imageName + ":")))
                 .collect(Collectors.toList());
 
-        logger.debug("matchingImages = ", matchingImages);
-
         if (matchingImages.isEmpty()) {
             return null;
         }

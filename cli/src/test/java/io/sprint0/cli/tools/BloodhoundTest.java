@@ -15,7 +15,6 @@ import org.junit.experimental.categories.Category;
 /**
  *
  */
-@Ignore
 public class BloodhoundTest extends ToolTest <Bloodhound> {
 
     @Override
