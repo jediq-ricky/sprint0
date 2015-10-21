@@ -5,6 +5,8 @@ import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.ProgressHandler;
+import com.spotify.docker.client.messages.ContainerConfig;
+import com.spotify.docker.client.messages.ContainerCreation;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.configuration.Configuration;
@@ -28,13 +30,7 @@ public class DockerStartActivityTest {
     @Test
     public void testHaveNotPulled() throws Exception {
         final DockerClient docker = mock(DockerClient.class);
-
-        DockerActivity dockerActivity = new DockerStartActivity(new Jenkins()) {
-            @Override
-            public DockerClient getDocker() throws DockerCertificateException {
-                return docker;
-            }
-        };
+        DockerActivity dockerActivity = getDockerActivity(docker);
         Image image = mock(Image.class);
         when(image.repoTags()).thenReturn(ImmutableList.of("test_jenkinsXXXX:123456"));
         when(docker.listImages()).thenReturn(ImmutableList.of(image));
@@ -44,9 +40,42 @@ public class DockerStartActivityTest {
         assertThat(activityResult.getMessage(), is("We haven't pulled image : jenkins"));
 
         verify(docker, never()).startContainer(eq("test_jenkins"));
-
     }
 
+    @Test
+    public void testSuccessfulStart() throws Exception {
+        final DockerClient docker = mock(DockerClient.class);
+        DockerActivity dockerActivity = getDockerActivity(docker);
+        Image image = mock(Image.class);
+        when(image.id()).thenReturn("123456");
+        when(image.repoTags()).thenReturn(ImmutableList.of("jenkins:12.34.56"));
+        when(docker.listImages()).thenReturn(ImmutableList.of(image));
+
+
+        ContainerCreation containerCreation = mock(ContainerCreation.class);
+        when(docker.createContainer(any(ContainerConfig.class))).thenReturn(containerCreation);
+
+        ActivityResult activityResult = dockerActivity.go(null);
+
+
+
+        assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
+
+        verify(docker, never()).startContainer(eq("test_jenkins"));
+    }
+
+    private DockerActivity getDockerActivity(final DockerClient docker) {
+        DockerStartActivity activity = new DockerStartActivity(new Jenkins()) {
+            @Override
+            public DockerClient getDocker() throws DockerCertificateException {
+                return docker;
+            }
+        };
+        Job job = new Job();
+        job.setConfigurationStore(new ConfigurationStore());
+        job.addActivity(activity);
+        return activity;
+    }
 
     @Test
     @Category(IntegrationTest.class)
@@ -59,12 +88,5 @@ public class DockerStartActivityTest {
 
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
-    }
-
-    @Test
-    public void test() {
-        ConfigurationStore configurationStore = new ConfigurationStore();
-        Configuration configuration = new Configuration();
-        configurationStore.saveConfiguration(configuration);
     }
 }

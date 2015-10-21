@@ -36,4 +36,8 @@ public class DockerPullActivity extends DockerActivity {
         return new ActivityResult(ActivityResult.Status.SUCCESS);
     }
 
+    @Override
+    public String toString() {
+        return "DockerPull : (" + tool + ")";
+    }
 }

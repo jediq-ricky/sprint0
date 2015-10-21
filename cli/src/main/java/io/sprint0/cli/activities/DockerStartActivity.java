@@ -79,4 +79,8 @@ public class DockerStartActivity extends DockerActivity {
         return portBindings;
     }
 
+    @Override
+    public String toString() {
+        return "DockerStart : (" + tool + ")";
+    }
 }
