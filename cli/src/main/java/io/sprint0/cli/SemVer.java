@@ -3,8 +3,12 @@ package io.sprint0.cli;
 import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SemVer {
+
+    private final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String patternString = "^(?:(\\d+)\\.)?(?:(\\d+)\\.)?(\\*|\\d+)$";
     private Pattern pattern = Pattern.compile(patternString);
@@ -31,9 +35,16 @@ public class SemVer {
             Matcher matcher = pattern.matcher(value);
             boolean foundMatch = matcher.find();
             if (foundMatch) {
-                major = Integer.parseInt(matcher.group(1));
-                minor = Integer.parseInt(matcher.group(2));
-                patch = Integer.parseInt(matcher.group(3));
+                try {
+                    major = Integer.parseInt(matcher.group(1));
+                    minor = Integer.parseInt(matcher.group(2));
+                    patch = Integer.parseInt(matcher.group(3));
+                } catch (NumberFormatException e) {
+                    logger.info("Caught number format exception for : " + value + " at line " + e.getStackTrace()[0].getLineNumber());
+                    if (strict) {
+                        throw new IllegalArgumentException("Value '" + value + "' is not sem-ver compliant");
+                    }
+                }
             } else {
                 if (strict) {
                     throw new IllegalArgumentException("Value '" + value + "' is not sem-ver compliant");

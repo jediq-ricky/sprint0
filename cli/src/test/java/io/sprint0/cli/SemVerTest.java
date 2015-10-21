@@ -36,6 +36,16 @@ public class SemVerTest {
         new SemVer("dsvndskl");
     }
 
+    @Test(expected=IllegalArgumentException.class)
+    public void testNonCompliantNumber_strict() {
+        new SemVer("1.2.B", true);
+    }
+
+    @Test
+    public void testNonCompliantNumber_nonStrict() {
+        new SemVer("1.2.B");
+    }
+
     @Test
     public void testInstance() {
         checkInstance("1.0.0", 1, 0, 0);
