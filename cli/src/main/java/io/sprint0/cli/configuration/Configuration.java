@@ -2,10 +2,10 @@ package io.sprint0.cli.configuration;
 
 public class Configuration {
 
-    private String currentDockerProtocol = "https";
-    private String currentDockerHost = "192.168.99.100";
-    private String currentDockerPort = "2376";
-    private String currentDockerCertPath= "/Users/rickywalker/.docker/machine/machines/default";
+    private String currentDockerProtocol;
+    private String currentDockerHost;
+    private String currentDockerPort;
+    private String currentDockerCertPath;
 
     public String getCurrentDockerHost() {
         return currentDockerHost;

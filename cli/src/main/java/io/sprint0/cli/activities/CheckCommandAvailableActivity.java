@@ -33,5 +33,6 @@ public class CheckCommandAvailableActivity implements Activity {
 
     @Override
     public void setJob(Job job) {
+        // we don't really care about the job here
     }
 }

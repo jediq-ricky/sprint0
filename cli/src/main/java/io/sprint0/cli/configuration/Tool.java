@@ -1,8 +1,6 @@
 package io.sprint0.cli.configuration;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Tool {
 
