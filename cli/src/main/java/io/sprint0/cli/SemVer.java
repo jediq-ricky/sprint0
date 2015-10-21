@@ -13,15 +13,18 @@ public class SemVer {
     private int major;
     private int minor;
     private int patch;
-    private String classifier;
-    private boolean strict = false;
 
     private boolean latest;
 
 
     public SemVer(String value) {
+        this(value, false);
+    }
+
+    public SemVer(String value, boolean strict) {
         this.value = value;
-        if (value.equalsIgnoreCase("latest")) {
+
+        if ("latest".equalsIgnoreCase(value)) {
             latest = true;
         } else {
 
@@ -56,29 +59,31 @@ public class SemVer {
         return patch;
     }
 
-    public String getClassifier() {
-        return classifier;
+    public boolean isLatest() {
+        return latest;
     }
 
     public static class SVComparator implements Comparator<SemVer> {
 
         @Override
         public int compare(SemVer left, SemVer right) {
-            int majorCompare = Integer.compare(left.getMajor(), right.getMajor());
-            int minorCompare = Integer.compare(left.getMinor(), right.getMinor());
-            int patchCompare = Integer.compare(left.getPatch(), right.getPatch());
-            int classifierCompare = left.getClassifier() != null ? left.getClassifier().compareTo(right.getClassifier()) : 0;
+            if (left.isLatest() && right.isLatest()) {
+                return 0;
+            }
 
-            if (majorCompare != 0) {
-                return majorCompare;
+            if (left.isLatest()) {
+                return -1;
             }
-            if (minorCompare != 0) {
-                return minorCompare;
+
+            if (right.isLatest()) {
+                return 1;
             }
-            if (patchCompare != 0) {
-                return patchCompare;
-            }
-            return classifierCompare;
+
+            int majorCompare = Integer.compare(left.getMajor(), right.getMajor()) * 1000000;
+            int minorCompare = Integer.compare(left.getMinor(), right.getMinor()) * 1000;
+            int patchCompare = Integer.compare(left.getPatch(), right.getPatch()) * 1;
+
+            return majorCompare + minorCompare + patchCompare;
         }
     }
 }
