@@ -70,7 +70,8 @@ public class DockerCommandActivityTest {
     public void testKnownImageIT() {
         Jenkins tool = new Jenkins();
         DockerStartActivity dockerStartActivity = new DockerStartActivity(tool);
-        DockerActivity dockerCommandActivity = new DockerCommandActivity(tool, "bash", "-c", "ls");
+
+        DockerActivity dockerCommandActivity = new DockerCommandActivity(tool, "ls", "-al");
 
         Job job = new Job();
         job.setConfigurationStore(new ConfigurationStore());

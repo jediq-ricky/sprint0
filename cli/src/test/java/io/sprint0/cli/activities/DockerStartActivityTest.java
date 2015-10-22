@@ -51,13 +51,10 @@ public class DockerStartActivityTest {
         when(image.repoTags()).thenReturn(ImmutableList.of("jenkins:12.34.56"));
         when(docker.listImages()).thenReturn(ImmutableList.of(image));
 
-
         ContainerCreation containerCreation = mock(ContainerCreation.class);
         when(docker.createContainer(any(ContainerConfig.class), any(String.class))).thenReturn(containerCreation);
 
         ActivityResult activityResult = dockerActivity.go(null);
-
-
 
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
 
