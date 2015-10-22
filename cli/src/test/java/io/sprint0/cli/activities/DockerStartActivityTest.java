@@ -53,7 +53,7 @@ public class DockerStartActivityTest {
 
 
         ContainerCreation containerCreation = mock(ContainerCreation.class);
-        when(docker.createContainer(any(ContainerConfig.class))).thenReturn(containerCreation);
+        when(docker.createContainer(any(ContainerConfig.class), any(String.class))).thenReturn(containerCreation);
 
         ActivityResult activityResult = dockerActivity.go(null);
 

@@ -72,16 +72,13 @@ public class DockerCommandActivityTest {
         DockerStartActivity dockerStartActivity = new DockerStartActivity(tool);
         DockerActivity dockerCommandActivity = new DockerCommandActivity(tool, "bash", "-c", "ls");
 
-
         Job job = new Job();
         job.setConfigurationStore(new ConfigurationStore());
         job.addActivity(dockerStartActivity);
         job.addActivity(dockerCommandActivity);
 
-
         ActivityResult startActivityResult = dockerStartActivity.go(null);
         assertThat(startActivityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
-
 
         ActivityResult activityResult = dockerCommandActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
