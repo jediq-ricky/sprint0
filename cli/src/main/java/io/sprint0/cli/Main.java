@@ -1,6 +1,7 @@
 package io.sprint0.cli;
 
 import io.sprint0.cli.configuration.ConfigurationStore;
+import io.sprint0.cli.configuration.StandardInConfigurationProvider;
 import io.sprint0.cli.jobs.FullScaffoldJob;
 import io.sprint0.cli.jobs.Job;
 import io.sprint0.cli.jobs.NoOpJob;
@@ -34,6 +35,7 @@ public class Main {
         }
 
         ConfigurationStore configurationStore = new ConfigurationStore();
+        configurationStore.setConfigurationProvider(new StandardInConfigurationProvider());
 
         String command = commandLine.getArgList().get(0);
         if (jobLookup.containsKey(command)) {

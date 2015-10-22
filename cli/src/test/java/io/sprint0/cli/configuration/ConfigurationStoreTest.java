@@ -1,4 +1,4 @@
-package io.sprint0.cli;
+package io.sprint0.cli.configuration;
 
 import io.sprint0.cli.configuration.Configuration;
 import io.sprint0.cli.configuration.Installation;
@@ -16,6 +16,7 @@ public class ConfigurationStoreTest {
     public void testSaveLoadRemove() {
         String host = "my_test_host";
         ConfigurationStore manager = new ConfigurationStore();
+        manager.setConfigurationProvider(new DefaultConfigurationProvider());
 
         Installation original = new Installation();
         original.setHost(host);
@@ -29,27 +30,41 @@ public class ConfigurationStoreTest {
 
     @Test
     public void testSaveLoadRemoveConfig() {
-        String host = "my_test_host";
-        ConfigurationStore manager = new ConfigurationStore();
 
-        Configuration original = new Configuration();
-        original.setCurrentDockerHost(host);
-        manager.saveConfiguration(original);
+        String orig = System.getProperty(USER_HOME);
+        System.setProperty(USER_HOME, "/tmp/config");
+        try {
+            String host = "my_test_host";
 
-        Configuration fromFile = manager.loadConfiguration();
-        assertThat(fromFile.getCurrentDockerHost(), is(host));
+            ConfigurationStore manager = new ConfigurationStore();
+            manager.setConfigurationProvider(new DefaultConfigurationProvider());
 
-        manager.removeConfiguration();
+            Configuration original = new Configuration();
+            original.setCurrentDockerHost(host);
+            manager.saveConfiguration(original);
+
+            Configuration fromFile = manager.loadConfiguration();
+            assertThat(fromFile.getCurrentDockerHost(), is(host));
+
+            manager.removeConfiguration();
+        } finally {
+            System.setProperty(USER_HOME, orig);
+        }
     }
 
 
-    @Test(expected=IllegalStateException.class)
+    @Test
     public void testLoadConfigNonExistant() {
         String orig = System.getProperty(USER_HOME);
         System.setProperty(USER_HOME, "/tmp/unknown_location");
         try {
+
             ConfigurationStore manager = new ConfigurationStore();
-            manager.loadConfiguration();
+            manager.setConfigurationProvider(new DefaultConfigurationProvider());
+            Configuration config = manager.loadConfiguration();
+
+            assertThat(config.getCurrentDockerHost(), is("192.168.99.100"));
+
         } finally {
             System.setProperty(USER_HOME, orig);
         }
@@ -59,7 +74,9 @@ public class ConfigurationStoreTest {
     @Test(expected=IllegalStateException.class)
     public void testLoadNonExistant() {
         String host = "testLoadNonExistant_host";
+
         ConfigurationStore manager = new ConfigurationStore();
+        manager.setConfigurationProvider(new DefaultConfigurationProvider());
         manager.loadInstallation(host);
     }
 
@@ -67,6 +84,7 @@ public class ConfigurationStoreTest {
     public void testRemoveNonExistant() {
         String host = "testRemoveNonExistant_host";
         ConfigurationStore manager = new ConfigurationStore();
+        manager.setConfigurationProvider(new DefaultConfigurationProvider());
         manager.removeInstallation(host);
     }
 
@@ -74,12 +92,14 @@ public class ConfigurationStoreTest {
     public void testSaveNull_installation() {
         String host = "testSaveNull_installation";
         ConfigurationStore manager = new ConfigurationStore();
+        manager.setConfigurationProvider(new DefaultConfigurationProvider());
         manager.saveInstallation(host, null);
     }
+
     @Test(expected=IllegalArgumentException.class)
     public void testSaveNull_host() {
-        String host = "testSaveNull_host";
         ConfigurationStore manager = new ConfigurationStore();
+        manager.setConfigurationProvider(new DefaultConfigurationProvider());
         manager.saveInstallation(null, new Installation());
     }
 }

@@ -9,7 +9,7 @@ import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.configuration.Tool;
 import io.sprint0.cli.tools.Jenkins;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -21,7 +21,6 @@ import static org.mockito.Mockito.*;
 /**
  *
  */
-
 
 @Ignore
 public class DockerCommandActivityTest {
