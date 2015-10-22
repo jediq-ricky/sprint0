@@ -57,6 +57,8 @@ public class DockerStartActivity extends DockerActivity {
 
             docker.startContainer(id, hostConfig);
 
+            tool.addInstance(id);
+
 
         } catch (DockerException | DockerCertificateException | InterruptedException e) {
             logger.debug("Got exception from docker for : " + tool, e);

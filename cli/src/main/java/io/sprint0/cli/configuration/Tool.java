@@ -1,6 +1,8 @@
 package io.sprint0.cli.configuration;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tool {
 
@@ -10,6 +12,7 @@ public class Tool {
     private String version;
     private String [] ports = new String [0];
     private LocalDateTime installDateTime;
+    private List<String> instances = new ArrayList<>();
 
     public String getImageRef() {
         return imageRef;
@@ -62,5 +65,13 @@ public class Tool {
     @Override
     public String toString() {
         return getName();
+    }
+
+    public void addInstance(String instanceId) {
+        this.instances.add(instanceId);
+    }
+
+    public List<String> getInstances() {
+        return instances;
     }
 }
