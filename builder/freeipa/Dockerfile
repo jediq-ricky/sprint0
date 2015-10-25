@@ -1,6 +1,6 @@
-FROM bind:latest
+FROM freeipa:latest
 MAINTAINER Ricky Walker "ricky.walker@jediq.com"
-#NAME sprint0/bind
+#NAME sprint0/freeipa
 
 RUN apt-get -y update
 
