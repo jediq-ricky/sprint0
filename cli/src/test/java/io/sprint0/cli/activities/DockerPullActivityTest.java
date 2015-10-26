@@ -8,14 +8,12 @@ import com.spotify.docker.client.ProgressHandler;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.tools.Jenkins;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import java.util.Collections;
-
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.mockito.Mockito.*;
 
 /**

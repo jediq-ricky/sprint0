@@ -3,9 +3,10 @@ package io.sprint0.cli.jobs;
 import io.sprint0.cli.activities.Activity;
 import io.sprint0.cli.activities.ActivityResult;
 import org.apache.commons.cli.CommandLine;
+import org.junit.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import org.junit.Test;
 
 /**
  *

@@ -2,15 +2,13 @@ package io.sprint0.cli.jobs;
 
 import io.sprint0.cli.activities.Activity;
 import io.sprint0.cli.activities.CheckCommandAvailableActivity;
+import org.junit.Test;
+
 import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.core.Is.is;
-
-import io.sprint0.cli.activities.DockerPullActivity;
-import io.sprint0.cli.activities.DockerStartActivity;
-import io.sprint0.cli.configuration.ConfigurationStore;
-import org.junit.Test;
 
 /**
  *

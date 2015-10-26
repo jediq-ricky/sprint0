@@ -7,10 +7,11 @@ import io.sprint0.cli.activities.DockerPullActivity;
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.configuration.Tool;
 import io.sprint0.cli.jobs.Job;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  *

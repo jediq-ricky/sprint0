@@ -7,11 +7,9 @@ import java.util.List;
 public class Tool {
 
     private String name;
-    private String imageId;
     private String imageRef;
     private String version;
     private String [] ports = new String [0];
-    private LocalDateTime installDateTime;
     private List<String> instances = new ArrayList<>();
 
     public String getImageRef() {
@@ -30,28 +28,12 @@ public class Tool {
         this.name = name;
     }
 
-    public String getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
-    }
-
     public String getVersion() {
         return version;
     }
 
     public void setVersion(String version) {
         this.version = version;
-    }
-
-    public LocalDateTime getInstallDateTime() {
-        return installDateTime;
-    }
-
-    public void setInstallDateTime(LocalDateTime installDateTime) {
-        this.installDateTime = installDateTime;
     }
 
     public String[] getPorts() {

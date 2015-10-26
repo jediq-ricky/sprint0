@@ -3,23 +3,18 @@ package io.sprint0.cli.activities;
 import com.google.common.collect.ImmutableList;
 import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerClient;
-import com.spotify.docker.client.DockerException;
-import com.spotify.docker.client.ProgressHandler;
 import com.spotify.docker.client.messages.ContainerConfig;
 import com.spotify.docker.client.messages.ContainerCreation;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
-import io.sprint0.cli.configuration.Configuration;
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.jobs.Job;
 import io.sprint0.cli.tools.Jenkins;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.mockito.Mockito.*;
 
 /**

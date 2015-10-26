@@ -1,8 +1,9 @@
 package io.sprint0.cli.activities;
 
 import io.sprint0.cli.jobs.Job;
-import java.io.IOException;
 import org.apache.commons.cli.CommandLine;
+
+import java.io.IOException;
 
 /**
  *

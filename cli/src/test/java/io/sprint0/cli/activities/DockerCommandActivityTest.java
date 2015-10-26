@@ -1,11 +1,9 @@
 package io.sprint0.cli.activities;
 
-import com.google.common.collect.ImmutableList;
 import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.ProgressHandler;
-import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.configuration.Tool;

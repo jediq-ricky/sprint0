@@ -5,12 +5,14 @@ import io.sprint0.cli.configuration.StandardInConfigurationProvider;
 import io.sprint0.cli.jobs.FullScaffoldJob;
 import io.sprint0.cli.jobs.Job;
 import io.sprint0.cli.jobs.NoOpJob;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  *
@@ -35,7 +37,8 @@ public class Main {
         }
 
         ConfigurationStore configurationStore = new ConfigurationStore();
-        configurationStore.setConfigurationProvider(new StandardInConfigurationProvider());
+        PrintStream out = System.out; //NOSONAR
+        configurationStore.setConfigurationProvider(new StandardInConfigurationProvider(out));
 
         String command = commandLine.getArgList().get(0);
         if (jobLookup.containsKey(command)) {

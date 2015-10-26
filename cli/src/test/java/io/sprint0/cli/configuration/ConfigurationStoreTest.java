@@ -1,8 +1,5 @@
 package io.sprint0.cli.configuration;
 
-import io.sprint0.cli.configuration.Configuration;
-import io.sprint0.cli.configuration.Installation;
-import io.sprint0.cli.configuration.ConfigurationStore;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
