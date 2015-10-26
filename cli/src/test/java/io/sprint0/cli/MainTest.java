@@ -1,10 +1,11 @@
 package io.sprint0.cli;
 
 import io.sprint0.cli.jobs.Job;
+import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Test;
 
 /**
  *

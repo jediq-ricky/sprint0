@@ -2,15 +2,15 @@ package io.sprint0.cli.jobs;
 
 import io.sprint0.cli.activities.Activity;
 import io.sprint0.cli.activities.ActivityResult;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.configuration.ConfigurationStoreHolder;
 import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *

@@ -5,6 +5,7 @@ import io.sprint0.cli.activities.DockerPullActivity;
 import io.sprint0.cli.activities.DockerStartActivity;
 import io.sprint0.cli.configuration.Tool;
 import io.sprint0.cli.tools.*;
+
 import java.util.Arrays;
 import java.util.List;
 

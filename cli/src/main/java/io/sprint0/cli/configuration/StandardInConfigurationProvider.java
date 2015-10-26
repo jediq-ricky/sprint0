@@ -1,9 +1,15 @@
 package io.sprint0.cli.configuration;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class StandardInConfigurationProvider implements ConfigurationProvider {
 
+    private final PrintStream printStream;
+
+    public StandardInConfigurationProvider(PrintStream printStream) {
+        this.printStream = printStream;
+    }
 
     @Override
     public Configuration provide() {
@@ -13,16 +19,16 @@ public class StandardInConfigurationProvider implements ConfigurationProvider {
         Scanner scanner = new Scanner(System.in);
 
 
-        System.out.print("Docker host : ");
+        printStream.print("Docker host : ");
         configuration.setCurrentDockerHost(scanner.next());
 
-        System.out.print("Docker port : ");
+        printStream.print("Docker port : ");
         configuration.setCurrentDockerPort(scanner.next());
 
-        System.out.print("Docker protocol : ");
+        printStream.print("Docker protocol : ");
         configuration.setCurrentDockerProtocol(scanner.next());
 
-        System.out.print("Docker cert path : ");
+        printStream.print("Docker cert path : ");
         configuration.setCurrentDockerCertPath(scanner.next());
 
 
