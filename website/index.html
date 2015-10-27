@@ -77,7 +77,58 @@
 			font-size:28pt;
 		}
 
-        @media handheld, only screen and (max-width: 1000px) {
+		#tools ul {
+			list-style:none;
+			overflow:auto;
+		}
+
+		#xtools li {
+			width:200px;
+			height:100px;
+			padding:10px;
+			border:1px solid #757779;
+			border-radius:5px;
+			float:left;
+			margin:10px;
+		}
+
+		#txools li .helper {
+			height: 100%;
+			vertical-align: middle;
+		}
+
+		#xtools img {
+			width:180px;
+			vertical-align: middle;
+		}
+
+
+		#tools li {
+			height: 100px;      /* equals max image height */
+			width: 250px;
+			border: 1px solid red;
+			white-space: nowrap;
+			border:1px solid #757779;
+			border-radius:5px;
+			text-align: center; margin: 1em 0;
+			float:left;
+			margin:10px;
+		}
+
+		#tools li .helper {
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+		}
+
+		#tools li img {
+			vertical-align: middle;
+			max-height: 100px;
+			max-width: 220px;
+		}
+
+
+		@media handheld, only screen and (max-width: 1000px) {
 			#explanation section, #explanation aside { 
             	width:100%;
 			}
@@ -100,7 +151,9 @@
 	<article class="dark" id="explanation">
 		<section>
 			<p>Every software project starts with a sprint zero.</p>
-			<p>Sprint zero is when your development team spend a couple of weeks choosing, installing and configuring tools.  This upfront project "hit" will undoubtedly save time and money in the long term, but it's often painful, it doesn't need to be.</p>
+			<p>Sprint zero is when your development team spend a couple of weeks choosing, installing and configuring
+				tools.  This upfront project "hit" will undoubtedly save time and money in the long term, but it's often
+				painful when it doesn't need to be.</p>
 			<p>
 			Sprint Zero makes opinionated choices on the tools that you use allowing your team to get on with the important stuff, delivering business value.
 			</p>
@@ -128,10 +181,37 @@
 			
 		</aside>
 	</article>
+	
+	<article id="tools">
+		<ul>
+			<li>
+				<span class="helper"></span>
+				<img src="img/jenkins.png"/>
+			</li>
+			<li>
+				<span class="helper"></span>
+				<img src="img/artifactory.png"/>
+			</li>
+			<li>
+				<span class="helper"></span>
+				<img src="img/gitlab.svg"/>
+			</li>
+			<li>
+				<span class="helper"></span>
+				<img src="img/openldap.png"/>
+			</li>
+			<li>
+				<span class="helper"></span>
+				<img src="img/sonarqube.png"/>
+			</li>
+		</ul>
+	</article>
+
 	<article id="beta">
 		We're currently ironing out the creases in beta.  
 		<br/>
 		Come back soon to start using sprint zero.
 	</article>
+
 </body>
 </html>
