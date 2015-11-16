@@ -54,6 +54,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Main main = new Main(args);
         LOGGER.info("Completing sprint0 : " + main.getJobStatus());
+        int exitCode = Job.Status.SUCCESS.equals(main.getJobStatus()) ? 0 : 1;
+        System.exit(exitCode);
+
     }
 
     private void showHelp(Options options) {
