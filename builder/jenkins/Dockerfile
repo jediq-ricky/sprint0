@@ -1,6 +1,8 @@
-FROM nginx:1.9.0
+FROM jenkins:latest
 MAINTAINER Ricky Walker "ricky.walker@jediq.com"
-#NAME sprint0/nginx
+#NAME sprint0/jenkins
+
+USER root
 
 RUN apt-get -y update
 
