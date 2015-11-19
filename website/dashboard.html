@@ -10,7 +10,8 @@
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-	
+
+	<link rel="stylesheet" href="css/simplegrid.css"/>
 	<style>
 
         *, *:after, *:before {
@@ -26,20 +27,33 @@
 			background:black;
         }
 
-		.panel {
-			margin:10px;
-			padding:10px;
-		}
-
 		.dark {
 			background:#333;
 		}
 
+		.h1 { min-height:100px; }
+		.h2 { min-height:200px; }
+		.h3 { min-height:300px; }
+		.h4 { min-height:400px; }
+		.h5 { min-height:500px; }
+		.h6 { min-height:600px; }
+
+		#logoPanel { text-align:center; }
+
 	</style>
 </head>
 <body>
-	<div class="panel dark">
-		<img src="img/logo.svg" width="85" height="85"/>
+	<div class="grid">
+		<div id="logoPanel" class="col-2-12">
+			<div class="content dark h1">
+				<img src="img/logo.svg" width="85" height="85"/>
+			</div>
+		</div>
+		<div id="namePanel" class="col-10-12">
+			<div class="content dark h1">
+				12345
+			</div>
+		</div>
 	</div>
 
 </body>
