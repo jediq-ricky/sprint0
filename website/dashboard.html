@@ -21,7 +21,7 @@
         }
 
         body {
-            margin:0;
+            margin:5px;
             font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
             font-weight: 300;
 			background:black;
@@ -36,11 +36,16 @@
 		}
 
 		.dark {
-			background:#333;
+		background:#333;
+		color:#AAA;
+		}
+
+		.light {
+		background:#FFF;
+		color:#000;
 		}
 
 		.dark h1, .dark h2, .dark h3 {
-			color:#AAA;
 		}
 
 		.w1 { width:8.33%; }
@@ -63,11 +68,28 @@
 		.h5 { min-height:500px; }
 		.h6 { min-height:600px; }
 
-		#logoPanel { text-align:center; }
+		#logoPanel .content { text-align:center; padding-top:8px;}
+		#namePanel .content { padding:10px; font-size:40pt; }
 
-		.content { text-align:center; }
-		.content h2 { padding:10px 0 20px 0; }
-		.content h3 { font-size:60pt; padding-bottom:10px; }
+		.content { text-align:center; overflow:auto; }
+		.content h2 { padding:30px 0 20px 0; }
+		.content h3 { font-size:80pt; padding-bottom:40px; }
+
+		#toolsPanel .content {
+			padding:20px;
+		}
+
+		#toolsPanel a {
+		white-space: nowrap;
+		text-align: center;
+		margin:20px;
+		}
+
+		#toolsPanel a img {
+		vertical-align: middle;
+		width: 205px;
+		}
+
 
 	</style>
 </head>
@@ -104,6 +126,31 @@
 				<h3>5</h3>
 			</div>
 		</div>
+
+		<div id="toolsPanel" class="panel w3">
+			<div class="content light h3">
+
+					<a>
+						<img src="img/jenkins.png"/>
+					</a>
+					<a>
+						<img src="img/artifactory.png"/>
+					</a>
+					<a>
+						<img src="img/gitlab.svg"/>
+					</a>
+					<a>
+						<img src="img/sonarqube.png"/>
+					</a>
+				</ul>
+			</div>
+		</div>
+
+		<div id="buildsPanel" class="panel w9">
+			<div class="content dark h3">
+			</div>
+		</div>
+
 	</div>
 
 </body>
