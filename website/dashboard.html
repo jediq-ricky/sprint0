@@ -27,9 +27,34 @@
 			background:black;
         }
 
+		h1, h2, h3, h4 { font-weight:300; margin:0; }
+
+		.panel {
+			padding:5px;
+			float:left;
+
+		}
+
 		.dark {
 			background:#333;
 		}
+
+		.dark h1, .dark h2, .dark h3 {
+			color:#AAA;
+		}
+
+		.w1 { width:8.33%; }
+		.w2 { width:16.66%; }
+		.w3 { width:25%; }
+		.w4 { width:33.33%; }
+		.w5 { width:41.66%; }
+		.w6 { width:50%; }
+		.w7 { width:58.33%; }
+		.w8 { width:66.66%; }
+		.w9 { width:75%; }
+		.w10{ width:83.33%; }
+		.w11{ width:91.66%; }
+		.w12{ width:100%; }
 
 		.h1 { min-height:100px; }
 		.h2 { min-height:200px; }
@@ -40,18 +65,43 @@
 
 		#logoPanel { text-align:center; }
 
+		.content { text-align:center; }
+		.content h2 { padding:10px 0 20px 0; }
+		.content h3 { font-size:60pt; padding-bottom:10px; }
+
 	</style>
 </head>
 <body>
 	<div class="grid">
-		<div id="logoPanel" class="col-2-12">
+		<div id="logoPanel" class="panel w2">
 			<div class="content dark h1">
 				<img src="img/logo.svg" width="85" height="85"/>
 			</div>
 		</div>
-		<div id="namePanel" class="col-10-12">
+		<div id="namePanel" class="panel w10">
 			<div class="content dark h1">
-				12345
+				My funky project
+			</div>
+		</div>
+
+		<div id="codeCommitsPanel" class="panel w4">
+			<div class="content dark h1">
+				<h2>Code Commits</h2>
+				<h3>12</h3>
+			</div>
+		</div>
+
+		<div id="testsExecutedPanel" class="panel w4">
+			<div class="content dark h1">
+				<h2>Tests Executed</h2>
+				<h3>645</h3>
+			</div>
+		</div>
+
+		<div id="buildsCompletedPanel" class="panel w4">
+			<div class="content dark h1">
+				<h2>Builds Completed</h2>
+				<h3>5</h3>
 			</div>
 		</div>
 	</div>
