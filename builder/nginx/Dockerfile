@@ -8,4 +8,6 @@ RUN apt-get -y install puppet
 
 COPY Puppetfile.pp /puppet/
 
+COPY dashboard /www/dashboard
+
 RUN puppet apply /puppet/Puppetfile.pp

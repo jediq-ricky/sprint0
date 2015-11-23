@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="sprint zero website">
+    <meta name="author" content="Jediq Ltd">
+    <title>Sprint Zero Dashboard</title>
+	
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+	<link rel="stylesheet" href="css/simplegrid.css"/>
+	<style>
+
+        *, *:after, *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin:5px;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+			background:black;
+        }
+
+		h1, h2, h3, h4 { font-weight:300; margin:0; }
+
+		.panel {
+			padding:5px;
+			float:left;
+
+		}
+
+		.dark {
+		background:#333;
+		color:#AAA;
+		}
+
+		.light {
+		background:#FFF;
+		color:#000;
+		}
+
+		.dark h1, .dark h2, .dark h3 {
+		}
+
+		.w1 { width:8.33%; }
+		.w2 { width:16.66%; }
+		.w3 { width:25%; }
+		.w4 { width:33.33%; }
+		.w5 { width:41.66%; }
+		.w6 { width:50%; }
+		.w7 { width:58.33%; }
+		.w8 { width:66.66%; }
+		.w9 { width:75%; }
+		.w10{ width:83.33%; }
+		.w11{ width:91.66%; }
+		.w12{ width:100%; }
+
+		.h1 { min-height:100px; }
+		.h2 { min-height:200px; }
+		.h3 { min-height:300px; }
+		.h4 { min-height:400px; }
+		.h5 { min-height:500px; }
+		.h6 { min-height:600px; }
+
+		#logoPanel .content { text-align:center; padding-top:8px;}
+		#namePanel .content { padding:10px; font-size:40pt; }
+
+		.content { text-align:center; overflow:auto; }
+		.content h2 { padding:30px 0 20px 0; }
+		.content h3 { font-size:80pt; padding-bottom:40px; }
+
+		#toolsPanel .content {
+			padding:20px;
+		}
+
+		#toolsPanel a {
+		white-space: nowrap;
+		text-align: center;
+		margin:20px;
+		}
+
+		#toolsPanel a img {
+		vertical-align: middle;
+		width: 205px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="grid">
+		<div id="logoPanel" class="panel w2">
+			<div class="content dark h1">
+				<img src="img/logo.svg" width="85" height="85"/>
+			</div>
+		</div>
+		<div id="namePanel" class="panel w10">
+			<div class="content dark h1">
+				My Sprint Zero Project
+			</div>
+		</div>
+
+		<div id="codeCommitsPanel" class="panel w4">
+			<div class="content dark h1">
+				<h2>Code Commits</h2>
+				<h3>0</h3>
+			</div>
+		</div>
+
+		<div id="testsExecutedPanel" class="panel w4">
+			<div class="content dark h1">
+				<h2>Tests Executed</h2>
+				<h3>0</h3>
+			</div>
+		</div>
+
+		<div id="buildsCompletedPanel" class="panel w4">
+			<div class="content dark h1">
+				<h2>Builds Completed</h2>
+				<h3>0</h3>
+			</div>
+		</div>
+
+		<div id="toolsPanel" class="panel w3">
+			<div class="content light h3">
+
+					<a>
+						<img src="img/jenkins.png"/>
+					</a>
+					<a>
+						<img src="img/artifactory.png"/>
+					</a>
+					<a>
+						<img src="img/gitlab.svg"/>
+					</a>
+					<a>
+						<img src="img/sonarqube.png"/>
+					</a>
+				</ul>
+			</div>
+		</div>
+
+		<div id="buildsPanel" class="panel w9">
+			<div class="content dark h3">
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
