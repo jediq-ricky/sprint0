@@ -55,7 +55,7 @@ public class Main {
         Main main = new Main(args);
         LOGGER.info("Completing sprint0 : " + main.getJobStatus());
         int exitCode = Job.Status.SUCCESS.equals(main.getJobStatus()) ? 0 : 1;
-        System.exit(exitCode);
+        System.exit(exitCode); //NOSONAR
 
     }
 
