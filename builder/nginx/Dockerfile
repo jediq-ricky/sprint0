@@ -8,6 +8,6 @@ RUN apt-get -y install puppet
 
 COPY Puppetfile.pp /puppet/
 
-COPY dashboard /www/dashboard
+COPY dashboard /usr/share/nginx/html
 
 RUN puppet apply /puppet/Puppetfile.pp

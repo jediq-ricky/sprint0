@@ -10,6 +10,7 @@ import io.sprint0.cli.IntegrationTest;
 import io.sprint0.cli.configuration.ConfigurationStore;
 import io.sprint0.cli.jobs.Job;
 import io.sprint0.cli.tools.Jenkins;
+import io.sprint0.cli.tools.Nginx;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -72,7 +73,7 @@ public class DockerStartActivityTest {
     @Test
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
-        DockerActivity dockerActivity = new DockerStartActivity(new Jenkins());
+        DockerActivity dockerActivity = new DockerStartActivity(new Nginx());
         Job job = new Job();
         job.setConfigurationStore(new ConfigurationStore());
         job.addActivity(dockerActivity);
