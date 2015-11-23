@@ -223,5 +223,29 @@
 		Come back soon to start using sprint zero.
 	</article>
 
+	<div id="paper" style="width:100%;height:480px;border:1px solid gray"></div>
+
+
+	<script src="js/raphael-min.js"></script>
+	<script src="js/dom.jsPlumb-1.7.6-min.js"></script>
+
+	<script>
+		var j3 = jsPlumb.getInstance();
+		j3.setContainer("paper");
+		var paper = Raphael("paper");
+
+		var circle1 = paper.circle(140, 110, 90).attr({ fill: '#3D6AA2', stroke: '#000000', 'stroke-width': 8 });
+		var circle2 = paper.circle(400, 180, 90).attr({ fill: '#3D6AA2', stroke: '#000000', 'stroke-width': 8 });
+		var rect = paper.rect(50, 280, 90, 70).attr({ fill: '#3D6AA2', stroke: '#000000', 'stroke-width': 8 });
+		var ellipse = paper.ellipse(300, 420, 90, 70).attr({ fill: '#3D6AA2', stroke: '#000000', 'stroke-width': 8 });
+
+		j3.connect({source:circle1.node, target:circle2.node, anchor:"Center", connector:"Straight"});
+
+		j3.connect({source:circle1.node, target:rect.node, anchors:["Center", "Top"], connector:"Straight"});
+
+		j3.connect({source:circle2.node, target:ellipse.node, anchor:"Center"});
+
+
+	</script>
 </body>
 </html>
