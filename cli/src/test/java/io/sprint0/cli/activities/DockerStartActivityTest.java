@@ -33,7 +33,7 @@ public class DockerStartActivityTest {
 
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.FAILURE));
-        assertThat(activityResult.getMessage(), is("We haven't pulled image : jenkins"));
+        assertThat(activityResult.getMessage(), is("We haven't pulled image : sprint0/jenkins"));
 
         verify(docker, never()).startContainer(eq("test_jenkins"));
     }

@@ -7,7 +7,10 @@ import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.ProgressHandler;
 import com.spotify.docker.client.messages.Image;
 import io.sprint0.cli.IntegrationTest;
+import io.sprint0.cli.configuration.ConfigurationStore;
+import io.sprint0.cli.jobs.Job;
 import io.sprint0.cli.tools.Jenkins;
+import io.sprint0.cli.tools.Nginx;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -30,7 +33,7 @@ public class DockerPullActivityTest {
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
 
-        verify(docker).pull(eq("jenkins"), any(ProgressHandler.class));
+        verify(docker).pull(eq("sprint0/jenkins"), any(ProgressHandler.class));
     }
 
     @Test
@@ -39,7 +42,7 @@ public class DockerPullActivityTest {
 
         DockerActivity dockerActivity = getDockerPullActivity(docker);
 
-        doThrow(new DockerException("fake")).when(docker).pull(eq("jenkins"), any(ProgressHandler.class));
+        doThrow(new DockerException("fake")).when(docker).pull(eq("sprint0/jenkins"), any(ProgressHandler.class));
 
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.FAILURE));
@@ -74,9 +77,13 @@ public class DockerPullActivityTest {
     @Test
     @Category(IntegrationTest.class)
     public void testKnownImageIT() {
-        DockerPullActivity dockerPullActivity = new DockerPullActivity(new Jenkins());
+        DockerPullActivity dockerActivity = new DockerPullActivity(new Jenkins());
 
-        ActivityResult activityResult = dockerPullActivity.go(null);
+        Job job = new Job();
+        job.setConfigurationStore(new ConfigurationStore());
+        job.addActivity(dockerActivity);
+
+        ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));
     }
 }
