@@ -63,7 +63,7 @@ public class DockerStartActivity extends DockerActivity {
                     .exposedPorts(ports)
                     .build();
 
-            String containerName = tool.getName() + "_" + tool.getInstances().size();
+            String containerName = tool.getName();
             ContainerCreation creation = docker.createContainer(containerConfig, containerName);
 
 

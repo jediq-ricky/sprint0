@@ -8,8 +8,8 @@ import io.sprint0.cli.configuration.Tool;
 public class Jenkins extends Tool {
 
     public Jenkins() {
-        setName("Jenkins");
-        setImageRef("jenkins");
+        setName("jenkins");
+        setImageRef("sprint0/jenkins");
         setVersion("latest");
         setPorts("8080");
     }
