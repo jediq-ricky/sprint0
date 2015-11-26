@@ -44,7 +44,7 @@ public class DockerStartActivityTest {
         DockerActivity dockerActivity = getDockerActivity(docker);
         Image image = mock(Image.class);
         when(image.id()).thenReturn("123456");
-        when(image.repoTags()).thenReturn(ImmutableList.of("jenkins:12.34.56"));
+        when(image.repoTags()).thenReturn(ImmutableList.of("sprint0/jenkins:12.34.56"));
         when(docker.listImages()).thenReturn(ImmutableList.of(image));
 
         ContainerCreation containerCreation = mock(ContainerCreation.class);
@@ -77,7 +77,6 @@ public class DockerStartActivityTest {
         Job job = new Job();
         job.setConfigurationStore(new ConfigurationStore());
         job.addActivity(dockerActivity);
-
 
         ActivityResult activityResult = dockerActivity.go(null);
         assertThat(activityResult.getStatus(), is(ActivityResult.Status.SUCCESS));

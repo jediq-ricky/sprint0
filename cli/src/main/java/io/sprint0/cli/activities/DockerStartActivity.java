@@ -10,10 +10,7 @@ import org.apache.commons.cli.CommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -55,8 +52,6 @@ public class DockerStartActivity extends DockerActivity {
 
 
             String[] ports = tool.getPorts();
-            final Map<String, List<PortBinding>> portBindings = getPortBindings(ports);
-            HostConfig hostConfig = HostConfig.builder().portBindings(portBindings).build();
 
             ContainerConfig containerConfig = ContainerConfig.builder()
                     .image(imageId)
@@ -72,13 +67,22 @@ public class DockerStartActivity extends DockerActivity {
             ContainerInfo info = docker.inspectContainer(id);
             logger.info("Starting container : " + info);
 
+            final Map<String, List<PortBinding>> portBindings = getPortBindings(ports);
+            HostConfig hostConfig = HostConfig.builder().portBindings(portBindings).build();
+
             docker.startContainer(id, hostConfig);
 
             tool.addInstance(id);
 
 
         } catch (DockerException | DockerCertificateException | InterruptedException e) {
-            logger.debug("Got exception from docker for : " + tool, e);
+            String thisClassName = this.getClass().getCanonicalName();
+            int lineNum = Arrays.stream(e.getStackTrace())
+                    .filter(el -> el.getClassName().equals(thisClassName))
+                    .findFirst().get().getLineNumber();
+            logger.debug(String.format("Got %s at line %s from docker for %s with message %s",
+                    e.getClass().getSimpleName(), lineNum, tool, e.getMessage()), e);
+
             return new ActivityResult(ActivityResult.Status.FAILURE, e);
         }
 
@@ -87,7 +91,7 @@ public class DockerStartActivity extends DockerActivity {
 
     private Container findExistingContainer(Tool tool)
             throws DockerException, DockerCertificateException, InterruptedException {
-        String name = "/" + tool.getName() + "_" + tool.getInstances().size();
+        String name = "/" + tool.getName();
         DockerClient.ListContainersParam listContainersParam = new DockerClient.ListContainersParam("all", "true");
         List<Container> containers = getDocker().listContainers(listContainersParam);
         for (Container container : containers) {
