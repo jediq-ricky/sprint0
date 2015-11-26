@@ -11,7 +11,8 @@
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-	<link rel="stylesheet" href="css/simplegrid.css"/>
+	<script lang="javascript" src="puppet-vars.js"></script>
+
 	<style>
 
         *, *:after, *:before {
@@ -76,18 +77,18 @@
 		.content h3 { font-size:80pt; padding-bottom:40px; }
 
 		#toolsPanel .content {
+			text-align:left;
 			padding:20px;
 		}
 
 		#toolsPanel a {
 		white-space: nowrap;
-		text-align: center;
 		margin:20px;
+		text-align:left;
 		}
 
 		#toolsPanel a img {
-		vertical-align: middle;
-		width: 205px;
+			width: 205px;
 		}
 
 
@@ -128,21 +129,7 @@
 		</div>
 
 		<div id="toolsPanel" class="panel w3">
-			<div class="content light h3">
-
-					<a>
-						<img src="img/jenkins.png"/>
-					</a>
-					<a>
-						<img src="img/artifactory.png"/>
-					</a>
-					<a>
-						<img src="img/gitlab.svg"/>
-					</a>
-					<a>
-						<img src="img/sonarqube.png"/>
-					</a>
-				</ul>
+			<div id="toolsContainer" class="content light h3">
 			</div>
 		</div>
 
@@ -152,6 +139,20 @@
 		</div>
 
 	</div>
+
+	<script>
+		console.log("Substituting tool variables : ", puppetVars.tools);
+		for (var toolPointer in puppetVars.tools) {
+
+			var tool = puppetVars.tools[toolPointer];
+			var toolElement = document.createElement('div');
+			toolElement.innerHTML= '<a href="' + tool.url
+				+ '"><img src="' + tool.image + '" alt="' + tool.name + '"/>'
+				+ '</a>';
+
+			document.getElementById("toolsContainer").appendChild(toolElement);
+		}
+	</script>
 
 </body>
 </html>
