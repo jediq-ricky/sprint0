@@ -2,6 +2,9 @@
 
 Sprint Zero, an opinionated constructor for development project toolsets.
 
+Very, VERY, early Alpha, ie it doesn't work yet.  But it's a start and it's [got a website](http://sprint0.io).
+
+
 ##Tools
 
 ###GitLab
