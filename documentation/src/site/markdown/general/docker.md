@@ -1,5 +1,12 @@
 #Docker
 
+
+https://www.docker.com/
+
+http://docs.docker.com/mac/started/
+
+
+
 To start a local docker uber-container use : 
 
     docker-machine start default

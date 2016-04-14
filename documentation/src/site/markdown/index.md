@@ -28,4 +28,6 @@ Future releases of sprint0 will provide these further tools :
 * **SonarQube** : Static code analysis
 * **Mattermost** : Slack compliant hosted messaging system
 * **Bloodhound** : Apache Open Source issue tracking system
+* **MySQL** : For persistent storage of tool data
+
 
