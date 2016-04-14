@@ -24,7 +24,7 @@
 
 
      <body>
-         <menu name="tools">
+         <menu name="general">
              <item name="Docker" href="general/docker.html"/>
              <item name="DNS" href="general/dns.html"/>
          </menu>
