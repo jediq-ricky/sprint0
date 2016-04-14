@@ -12,7 +12,7 @@
 		  <topBarIcon>
 		        <name>Sprint 0 Icon</name>
 		        <alt>Sprint 0 Icon</alt>
-		        <src>/img/logo.svg</src>
+		        <src>/img/logo-horiz.svg</src>
 		        <href>/index.html</href>
 		      </topBarIcon>
       </fluidoSkin>
@@ -24,9 +24,13 @@
 
 
      <body>
+         <menu name="General">
+             <item name="Docker" href="general/docker.html"/>
+             <item name="DNS" href="general/dns.html"/>
+         </menu>
          <menu name="CLI">
-             <item name="Overview" href="overview.html"/>
-		</menu>
+             <item name="Overview" href="cli/index.html"/>
+         </menu>
 		 <footer>&copy; Copyright 2015</footer>
 
 

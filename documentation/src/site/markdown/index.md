@@ -1,6 +1,5 @@
-#sprint 0
 
-##Opinionated scaffolding for software project toolsets
+#Opinionated scaffolding for software project toolsets
 
 Uses [Docker](http://docker.org) to host multiple tool containers:
 

@@ -1,0 +1,11 @@
+
+h2, h3 { margin-top:40px; }
+
+#bannerLeft h2 { display:none; }
+
+ol { padding-bottom:20px; }
+
+#permissions { width:100%; }
+#permissions td:nth-child(n+2) { text-align:center; }
+
+.breadcrumb { background:white; }
