@@ -1,15 +1,31 @@
 
-#Opinionated scaffolding for software project toolsets
+#Sprint Zero Documentation
 
-Uses [Docker](http://docker.org) to host multiple tool containers:
+##Opinionated scaffolding for software project toolsets
 
-1. Management Server
-1. DNS Server
-1. LDAP Server
-1. Jenkins Server
-1. Artifactory Server
-1. Sonar Server
-1. GitLab Server
-1. Apache Bloodhound Server
-1. Mattermost Server
+
+Sprint Zero (sprint0) tries to solve the development startup problem of toolset configuration.  It downloads, deploys and configures the basic tools required to start a development process.
+
+
+###Codebase
+The codebase is segregated into a number of areas : 
+
+* **builder** : For building the bespoke sprint0 docker images
+* **cli** : The command line interface for sprint0
+* **website** : The source code for the (sprint0.io)[http://sprint0.io] website
+* **documentation** : The documentation you are reading now
+
+
+###Tools
+The first release of sprint0 will provide the following tools :
+
+* **Nginx** : Reverse proxy to the other tools and host of the sprint0 pages
+* **Jenkins** : Continuous Integration Server
+* **GitLab** : GIT compliant Source Code Management
+
+Future releases of sprint0 will provide these further tools :
+
+* **SonarQube** : Static code analysis
+* **Mattermost** : Slack compliant hosted messaging system
+* **Bloodhound** : Apache Open Source issue tracking system
 

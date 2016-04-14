@@ -1,4 +1,4 @@
-<project name="Security Platform Documentation">
+<project name="Sprint Zero Documentation">
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
@@ -24,12 +24,22 @@
 
 
      <body>
-         <menu name="General">
+         <menu name="tools">
              <item name="Docker" href="general/docker.html"/>
              <item name="DNS" href="general/dns.html"/>
          </menu>
-         <menu name="CLI">
-             <item name="Overview" href="cli/index.html"/>
+
+         <menu name="tools">
+             <item name="nginx" href="tools/nginx.html"/>
+             <item name="jenkins" href="tools/jenkins.html"/>
+             <item name="gitlab" href="tools/gitlab.html"/>
+         </menu>
+
+         <menu name="codebase">
+             <item name="cli" href="codebase/cli.html"/>
+             <item name="builder" href="codebase/builder.html"/>
+             <item name="website" href="codebase/website.html"/>
+             <item name="documentation" href="codebase/documentation.html"/>
          </menu>
 		 <footer>&copy; Copyright 2015</footer>
 
